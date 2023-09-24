@@ -1,8 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
 import Axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -15,10 +13,6 @@ const Login = () => {
 
     try {
       let response = await Axios.post('http://localhost:5000/login', {username, password});
-      // console.log(email,password)
-      
-      console.log(response.data)
-
 
       if (response.data['status'] === 'failed') {
         alert('user not found')
