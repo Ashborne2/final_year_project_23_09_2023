@@ -40,21 +40,9 @@ createRoutesFromElements(
 function App() {
   return (
     <>
-    {/* // <div className="App">
-    //   <Navbar />
-    //   <Home />
-    //   <Footer />
-    //   <Claim />
-    //   <Dashboard />
-    //   <EmProfile />
-    //   <Register />
-    //   <Login />
-    //   <Error />
-      
-    // </div> */}
 
     {/* <nav><Navbar /></nav> */}
-    <Navbar />
+    {/* <Navbar /> */}
     
    
       
@@ -80,7 +68,7 @@ function App() {
       
       {/* <Route path='/claim' element={<Claim />} /> */}
       
-    
+      
      <RouterProvider router={router} />
       
     
@@ -92,11 +80,7 @@ function App() {
 
     
     <Footer />
-    {/* <footer><Footer /></footer> */}
-    
-   
-
-    
+        
     </>
     
   );

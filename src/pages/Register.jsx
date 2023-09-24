@@ -51,11 +51,21 @@ const Register = () => {
     //   }
     // })
     // const data = await response.json();
-    console.log(userdata);
+    let response = await Axios.post('http://localhost:5000/register', userdata)
 
-    Axios.post('http://localhost:5000/register', userdata)
+    if (response.data['status'] === 'new user created') {
+      alert('new user created')
+      navigate('/login')
+    } else if (response.data['status'] === 'user already exists') {
+      alert('user already exists')
+    }
 
-    navigate('/login')
+
+    // console.log(userdata);
+
+
+    // navigate('/login')
+
 
   };
 
@@ -149,7 +159,7 @@ const Register = () => {
 
                         /> */}
                         <input
-                        id="date_picker"
+                          id="date_picker"
                           name='dob'
                           type="date"
                           style=
@@ -282,7 +292,7 @@ const Register = () => {
 
       </div>
 
-    </main>   
+    </main>
     </div>
   )
 }

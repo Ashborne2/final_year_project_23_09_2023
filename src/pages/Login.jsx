@@ -26,7 +26,6 @@ const Login = () => {
       }else if(response.data['status'] === 'success'){
         alert('let me in')
         navigate('/')
-      
       }
   
     } catch (e) {
