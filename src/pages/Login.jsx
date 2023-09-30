@@ -2,6 +2,7 @@ import Axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+
 const Login = () => {
   const navigate = useNavigate()
 
@@ -13,12 +14,17 @@ const Login = () => {
 
     try {
       let response = await Axios.post('http://localhost:5000/login', {username, password});
+//get request with authentication token
+
+      
+      
 
       if (response.data['status'] === 'failed') {
-        alert('user not found')
+        alert(response.data['message'])
         console.log(Response)
       }else if(response.data['status'] === 'success'){
-        alert('let me in')
+        alert(response.data['message'])
+        localStorage.setItem('token', response.data['token'])
         navigate('/')
       }
   
