@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-const Claim = ({ loggedIn }) => {
+const Claim = () => {
   // if (!loggedIn) {
   //   // if the user is not logged in, redirect to the login page
   //   return <Navigate to="/login" />;
@@ -236,7 +236,7 @@ const Claim = ({ loggedIn }) => {
                     <input
                       type="text"
                       name="name"
-                      id="name"   
+                      id="name"
                       class="form-control"
                       required
                     />
@@ -250,7 +250,7 @@ const Claim = ({ loggedIn }) => {
                     <input
                       type="text"
                       name="Insurance_ID"
-                      id="email"       
+                      id="email"
                       class="form-control"
                       required
                     />
@@ -262,7 +262,7 @@ const Claim = ({ loggedIn }) => {
                 <div class="col-md-6">
                   <div class="form-group">
                     <label id="Insurance-label" for="Insurance">
-                      Insurance ID
+                      Policy Code
                     </label>
                     <input
                       type="text"
@@ -275,7 +275,7 @@ const Claim = ({ loggedIn }) => {
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>current role</label>
+                    <label>Type of damage coverage</label>
                     <select
                       id="dropdown"
                       name="role"
@@ -285,17 +285,16 @@ const Claim = ({ loggedIn }) => {
                       <option disabled selected value>
                         Select
                       </option>
-                      <option value="student">Student</option>
-                      <option value="job">Full Time Job</option>
-                      <option value="learner">Full Time Learner</option>
-                      <option value="preferNo">Prefer not to say</option>
-                      <option value="other">Other</option>
+                      <option value="full coverage">full coverage</option>
+                      <option value="Partial coverage">Partial coverage</option>
+                      <option value="No coverage">No coverage (Just to inform)</option>
+
                     </select>
                   </div>
                 </div>
               </div>
 
-              <div class="row">
+              {/* <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Would you recommend survey to a friend?</label>
@@ -378,18 +377,41 @@ const Claim = ({ loggedIn }) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label>Leave Message</label>
+                    <label>Describe your situation here</label>
                     <textarea
                       id="comments"
                       class="form-control"
                       name="comment"
                       placeholder="Describe your issue here..."
                     ></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    {/* <label>Upload your documents</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" /> */}
+                    <label>Please enter any relevent evidence that might describe the damage or the situation. <strong>It could be an image or images or videos</strong> .</label>
+                    <div>
+                      <div class="mb-4 d-flex justify-content-left">
+                        
+                        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+                          alt="example placeholder" style={{ width: "300px" }} />
+                      </div>
+                      <div class="d-flex justify-content-left">
+                        <div class="btn btn-primary btn-rounded">
+                          <label class="form-label text-white m-1" for="customFile1">Choose file</label>
+                          <input type="file" class="form-control d-none" id="customFile1" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -415,7 +437,7 @@ const Claim = ({ loggedIn }) => {
   );
 
 
- 
+
 };
 
 export default Claim;

@@ -61,9 +61,6 @@ const Register = () => {
     }
 
 
-    // console.log(userdata);
-
-
     // navigate('/login')
 
 
