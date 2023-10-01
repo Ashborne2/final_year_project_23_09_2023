@@ -294,6 +294,40 @@ const Claim = () => {
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label id="Insurance-label" for="Insurance">
+                      Location
+                    </label>
+                    <input
+                      type="text"
+                      name="Insurance-ID"
+                      id="Insurance"
+                      class="form-control"
+                      placeholder="Insurance ID"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Date and Time</label>
+                    <input 
+                    type="datetime-local" 
+                    name="birthdaytime"
+                    style=
+                          {{
+                            border: "#bfbec7",
+                            color: "black",                           
+                            padding: "10px",
+                            borderRadius: "10px",
+                            borderStyle: "solid",
+                          }}
+                    ></input>
+                  </div>
+                </div>
+              </div>
+
               {/* <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
