@@ -28,6 +28,7 @@ export const Navbar = () => {
   const handleLogout = () => {
 
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setIsLoggedin(false);
     // window.location.reload();
     toast.success("Logged Out Successfully")

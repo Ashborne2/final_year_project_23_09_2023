@@ -1,5 +1,7 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import Axios from 'axios'
 
 const Claim = () => {
   // if (!loggedIn) {
@@ -212,13 +214,44 @@ const Claim = () => {
   // );
 
   // }
+  const [claimFormData, setFormData] = useState({});
+
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    setFormData({
+      ...claimFormData,
+      [e.target.name]: e.target.value
+    })
+  };
+
+  const claimdata = {
+    "user_id": user._id,
+    "broker_name": claimFormData.name,
+    "insurance_id": claimFormData.Insurance_ID,
+    "policy_code": claimFormData.Policy_Code,
+    "damage_coverage": claimFormData.damage_coverage,
+    "location": claimFormData.Location,
+    "date_time": claimFormData.date_time,
+    "description": claimFormData.description,
+    "image": claimFormData.file
+
+  }
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let Response = await Axios.post('http://localhost:5000/claim',claimdata);
+    console.log(claimdata);
+  };
 
   return (
     <main id="main">
       <section id="" class="">
         <div class="container">
           <header class="header">
-            <h1 id="title" class="text-center">
+            <h1 id="title" class="text-center extraroom">
               Claim Form
             </h1>
             <p id="description" class="text-center">
@@ -239,6 +272,7 @@ const Claim = () => {
                       id="name"
                       class="form-control"
                       required
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -253,6 +287,7 @@ const Claim = () => {
                       id="email"
                       class="form-control"
                       required
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -266,10 +301,11 @@ const Claim = () => {
                     </label>
                     <input
                       type="text"
-                      name="Insurance-ID"
+                      name="Policy_Code"
                       id="Insurance"
                       class="form-control"
                       placeholder="Insurance ID"
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -278,9 +314,10 @@ const Claim = () => {
                     <label>Type of damage coverage</label>
                     <select
                       id="dropdown"
-                      name="role"
+                      name="damage_coverage"
                       class="form-control"
                       required
+                      onChange={handleChange}
                     >
                       <option disabled selected value>
                         Select
@@ -302,27 +339,29 @@ const Claim = () => {
                     </label>
                     <input
                       type="text"
-                      name="Insurance-ID"
+                      name="Location"
                       id="Insurance"
                       class="form-control"
                       placeholder="Insurance ID"
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Date and Time</label>
-                    <input 
-                    type="datetime-local" 
-                    name="birthdaytime"
-                    style=
-                          {{
-                            border: "#bfbec7",
-                            color: "black",                           
-                            padding: "10px",
-                            borderRadius: "10px",
-                            borderStyle: "solid",
-                          }}
+                    <input
+                      type="datetime-local"
+                      name="date_time"
+                      style=
+                      {{
+                        border: "#bfbec7",
+                        color: "black",
+                        padding: "10px",
+                        borderRadius: "10px",
+                        borderStyle: "solid",
+                      }}
+                      onChange={handleChange}
                     ></input>
                   </div>
                 </div>
@@ -420,8 +459,9 @@ const Claim = () => {
                     <textarea
                       id="comments"
                       class="form-control"
-                      name="comment"
+                      name="description"
                       placeholder="Describe your issue here..."
+                      onChange={handleChange}
                     ></textarea>
                   </div>
                 </div>
@@ -435,14 +475,14 @@ const Claim = () => {
                     <label>Please enter any relevent evidence that might describe the damage or the situation. <strong>It could be an image or images or videos</strong> .</label>
                     <div>
                       <div class="mb-4 d-flex justify-content-left">
-                        
+
                         <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
                           alt="example placeholder" style={{ width: "300px" }} />
                       </div>
                       <div class="d-flex justify-content-left">
                         <div class="btn btn-primary btn-rounded">
                           <label class="form-label text-white m-1" for="customFile1">Choose file</label>
-                          <input type="file" class="form-control d-none" id="customFile1" />
+                          <input type="file" name="file" class="form-control d-none" id="customFile1" />
                         </div>
                       </div>
                     </div>
@@ -456,6 +496,7 @@ const Claim = () => {
                     type="submit"
                     id="submit"
                     class="btn btn-primary btn-block"
+                    onClick={handleSubmit}
                   >
                     Submit Your Claim
                   </button>

@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, json, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 
@@ -23,8 +23,11 @@ const Login = () => {
         console.log(Response)
       } else if (response.data['status'] === 'success') {
         // alert(response.data['message'])
-        toast.success(response.data['message'])
+        toast.success(response.data['user']['username']+" "+response.data['message'])
+        const user = response.data['user']
+
         localStorage.setItem('token', response.data['token'])
+        localStorage.setItem('user', JSON.stringify(user))
         navigate('/')
         window.location.reload();
         

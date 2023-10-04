@@ -4,9 +4,9 @@ import { Outlet } from "react-router-dom";
 const AdminLayout = () => {
     return (
       <div>
-        <div className="container-fluid"> 
+        {/* <div className="container-fluid"> 
             i am admin layout
-        </div>
+        </div> */}
         <main>
         <Outlet />
         </main>

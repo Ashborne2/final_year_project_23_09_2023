@@ -14,7 +14,7 @@ const Register = () => {
 
 
   const handleChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
 
     setFormData({
       ...formData,
@@ -60,9 +60,7 @@ const Register = () => {
       alert('user already exists')
     }
 
-
     // navigate('/login')
-
 
   };
 
