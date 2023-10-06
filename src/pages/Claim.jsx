@@ -248,10 +248,10 @@ const Claim = () => {
 
   return (
     <main id="main">
-      <section id="" class="">
+      <section id="" class="extraroom">
         <div class="container">
           <header class="header">
-            <h1 id="title" class="text-center extraroom">
+            <h1 id="title" class="text-center ">
               Claim Form
             </h1>
             <p id="description" class="text-center">

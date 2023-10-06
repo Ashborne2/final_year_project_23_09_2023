@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Layout from './pages/Layout';
 import Register from './pages/Register';
 import EmProfile from './pages/EmProfile';
+import AdminClaim from './pages/Admin_Claim';
 
 
 
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path='/admin' element={<AdminLayout />}>
         <Route path='' element={<Dashboard />} />
         <Route path='/admin/emprofile' element={<EmProfile />} />
+        <Route path='/admin/admin_claim' element={<AdminClaim />} />
       </Route>
 
     </Route>
