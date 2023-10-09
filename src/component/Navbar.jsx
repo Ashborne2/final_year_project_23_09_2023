@@ -1,7 +1,7 @@
 import React from "react";
 import "../assets/css/style.css";
 import "../assets/vendor/bootstrap/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Toast } from "bootstrap";
@@ -68,31 +68,17 @@ export const Navbar = () => {
           </Link>
         </h1>
 
-        {/* <nav id="navbar" class="navbar">
-       
-          <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="#about">About</a></li>
-            <li><a class="nav-link scrollto" href="#services">Services</a></li>
-            <li><Link to={"/claim"} className="nav-link scrollto " >Claims</Link></li>
-
-            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-            <li><Link to={"/login"} class="getstarted scrollto no_underline">Login</Link></li>
-            
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle" onClick={handleClick} ></i>
-        </nav> */}
 
         <nav id="navbar" class="navbar">
           {isloggedin ? (
             <ul>
-              <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+              <li><NavLink class="nav-link scrollto " activeClassName="active" to={'/'}>Home</NavLink></li>
               <li><a class="nav-link scrollto" href="#about">About</a></li>
-              <li><a class="nav-link scrollto" href="#services">Services</a></li>
-              <li><Link to={"/claim"} className="nav-link scrollto " >Claims</Link></li>
+              <li><NavLink  class="nav-link scrollto" activeClassName="active" to={"/policyservice"}>Policy Services</NavLink></li>
+              <li><NavLink to={"/claim"} className="nav-link scrollto" activeClassName="active" >Claims</NavLink></li>
 
               <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-              <li><Link to={""} onClick={handleLogout} class="getstarted scrollto no_underline">Log Out</Link></li>
+              <li><NavLink onClick={handleLogout} class="getstarted scrollto">Log Out</NavLink></li>
               <i class="bi bi-list mobile-nav-toggle" onClick={handleClick} ></i>
             </ul>
           ) : (
@@ -101,7 +87,7 @@ export const Navbar = () => {
               <li><a class="nav-link scrollto" href="#about">About</a></li>
               <li><a class="nav-link scrollto" href="#services">Services</a></li>
               <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-              <li><Link to={"/login"} class="getstarted scrollto no_underline">Login</Link></li>
+              <li><NavLink to={"/login"} class="getstarted scrollto">Login</NavLink></li>
               <i class="bi bi-list mobile-nav-toggle" onClick={handleClick} ></i>
             </ul>
           )}

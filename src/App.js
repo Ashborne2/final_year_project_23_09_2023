@@ -11,6 +11,7 @@ import Layout from './pages/Layout';
 import Register from './pages/Register';
 import EmProfile from './pages/EmProfile';
 import AdminClaim from './pages/Admin_Claim';
+import PolicyService from './pages/PolicyService';
 
 
 
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
         <Route path='/claim' element={<Claim />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/policyservice' element={<PolicyService />} />
       </Route>
 
       <Route path='/admin' element={<AdminLayout />}>
