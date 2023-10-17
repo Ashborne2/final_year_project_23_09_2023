@@ -1,18 +1,43 @@
 import React from 'react'
 import "../dash-asset/css/dashboard.css";
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import axios from 'axios';
 
 function Admin_Claim() {
     let loop = [
         {
-            "name":"ryan"
+            "name": "ryan"
         },
         {
-            "name":"ABCD"
+            "name": "ABCD"
         }
     ]
 
+    const [data, setData] = useState([])
 
+    useEffect(() => {
+
+        // fetch("http://localhost:3000/claim")
+        //     .then(res => res.json())
+        //     .then(
+        //         (result) => {
+        //             // setData(result)
+        //             console.log(result)
+        //         },
+        //         (error) => {
+        //             console.log(error)
+        //         }
+        //     )
+        axios.get('http://localhost:5000/adminClaim')
+            .then(res => {
+                console.log(res.data.data)
+                setData(res.data.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
 
 
     return (
@@ -27,7 +52,7 @@ function Admin_Claim() {
                             <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                                 <li className="nav-item">
                                     <Link to={'/admin'} className="nav-link align-middle px-0">
-                                        <i className="fs-4 bi-house"></i> 
+                                        <i className="fs-4 bi-house"></i>
                                         <span className="ms-1 d-none d-sm-inline">
                                             Dashboard
                                         </span>
@@ -51,19 +76,14 @@ function Admin_Claim() {
                                         <span className="ms-1 d-none d-sm-inline">Manage Claims</span>
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link to={'#'} data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
-                                        <i className="fs-4 bi-bootstrap"></i>
-                                        <span className="ms-1 d-none d-sm-inline">Bootstrap</span>
-                                    </Link>
 
-                                </li>
                                 <li>
-                                    <Link to={'#'} data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                                    <Link to={'/admin/admin_policy'} className="nav-link px-0 align-middle">
                                         <i className="fs-4 bi-grid"></i>
                                         <span className="ms-1 d-none d-sm-inline">Policies</span>
                                     </Link>
                                 </li>
+
                                 <li>
                                     <Link to={'#'} className="nav-link px-0 align-middle">
                                         <i className="fs-4 bi-people"></i>
@@ -102,21 +122,21 @@ function Admin_Claim() {
 
 
 
-                                        {loop.map((elementInArray, index) => (
+                                        {data.map((elementInRes, index) => (
                                             <div className="accordion-item accordion_design" key={index}>
                                                 <h2 className="accordion-header" id={"panelsStayOpen-headingOne" + index}>
 
 
                                                     <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={"#panelsStayOpen-collapseOne" + index} aria-expanded="false" aria-controls={"panelsStayOpen-collapseOne" + index}>
                                                         <div className='normal_padding'>
-                                                            Claim ID {elementInArray.name}
+                                                            Claim ID : {elementInRes._id}
                                                         </div>
                                                         <div className="vr"></div>
                                                         <div className='normal_padding'>
-                                                            user name
+                                                            user name {elementInRes.user_id}
                                                         </div>
                                                         <div className='normal_padding thin_text'>
-                                                            Submitted: 12-23-22 14:00 pm
+                                                            Submitted: 12-23-22 14:00 pm {elementInRes.date_time}
                                                         </div>
                                                     </button>
 

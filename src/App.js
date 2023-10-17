@@ -12,6 +12,7 @@ import Register from './pages/Register';
 import EmProfile from './pages/EmProfile';
 import AdminClaim from './pages/Admin_Claim';
 import PolicyService from './pages/PolicyService';
+import AdminPolicy from './pages/Admin_Policies';
 
 
 
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
         <Route path='' element={<Dashboard />} />
         <Route path='/admin/emprofile' element={<EmProfile />} />
         <Route path='/admin/admin_claim' element={<AdminClaim />} />
+        <Route path='/admin/admin_policy' element={<AdminPolicy />} />
       </Route>
 
     </Route>

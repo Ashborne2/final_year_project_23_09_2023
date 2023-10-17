@@ -52,50 +52,17 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={'/admin/emprofile'} data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                  <Link to={'/admin/emprofile'} class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">My Profile</span> </Link>
-                  <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                    <li class="w-100">
-                      <Link to={'#'} class="nav-link px-0"> <span class="d-none d-sm-inline">Claim history</span></Link>
-                    </li>
-                    <li>
-                      <Link to={'#'} class="nav-link px-0"> <span class="d-none d-sm-inline">Rules and regulations </span></Link>
-                    </li>
-                  </ul>
                 </li>
                 <li>
                   <Link to={'/admin/admin_claim'} class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Manage Claims</span></Link>
                 </li>
+                
                 <li>
-                  <Link to={'#'} data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></Link>
-                  <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                    <li class="w-100">
-                      <Link to={'#'} class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</Link>
-                    </li>
-                    <li>
-                      <Link to={""} class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</Link>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <Link to={'#'} data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                  <Link to={'/admin/admin_policy'} class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Policies</span> </Link>
-                  <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                    <li class="w-100">
-                      <Link to={'#'} class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</Link>
-                    </li>
-                    <li>
-                      <Link to={'#'} class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</Link>
-                    </li>
-                    <li>
-                      <Link to={'#'} class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</Link>
-                    </li>
-                    <li>
-                      <Link to={'#'} class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</Link>
-                    </li>
-                  </ul>
                 </li>
                 <li>
                   <Link to={'#'} class="nav-link px-0 align-middle">
