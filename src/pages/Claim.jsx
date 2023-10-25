@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import Axios from 'axios'
+import toast from "react-hot-toast";
+
 
 function Claim() {
   const [claimFormData, setFormData] = useState({});
@@ -13,7 +15,7 @@ function Claim() {
 
 
 
-// on init state
+  // on init state
   useEffect(() => {
 
     Axios.get('http://localhost:5000/prClaims/' + user._id)
@@ -53,8 +55,8 @@ function Claim() {
     setFile(e.target.files[0])
   };
 
-  
-// submit the claim 
+
+  // submit the claim 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,14 +65,23 @@ function Claim() {
     formData.append('file', file);
     formData.append('claimdata', JSON.stringify(claimdata));
 
-    let Response = await Axios.post('http://localhost:5000/claim',formData );
+    let Response = await Axios.post('http://localhost:5000/claim', formData);
     // try {
     //   console.log(Response)
     // } catch (err) {
     //   console.log(err)
     // }    
-   
-   
+    if (Response.data['status'] === 'failed') {
+      toast.error(Response.data['message'])
+
+    } else if (Response.data['status'] === 'success') {
+      toast.success(Response.data['message'])
+      // window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    }
+
     console.log(Response.data.data);
   };
 
@@ -98,6 +109,9 @@ function Claim() {
               </header>
               <div className="form-wrap">
                 <form id="survey-form" method="post" enctype="multipart/form-data">
+
+                  <h3 className="card-title">Basic Information</h3>
+
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group">
@@ -169,6 +183,8 @@ function Claim() {
                     </div>
                   </div>
 
+                  <h3 className="card-title">Location and time of loss</h3>
+
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group">
@@ -191,6 +207,7 @@ function Claim() {
                         <input
                           type="datetime-local"
                           name="date_time"
+                          max={Date.now}
                           style=
                           {{
                             border: "#bfbec7",
@@ -219,6 +236,8 @@ function Claim() {
                       </div>
                     </div>
                   </div>
+
+                  <h3 className="card-title">Additional Evidence</h3>
 
                   <div className="row">
                     <div className="col-md-12">
@@ -279,15 +298,31 @@ function Claim() {
 
                         <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={"#panelsStayOpen-collapseOne" + index} aria-expanded="false" aria-controls={"panelsStayOpen-collapseOne" + index}>
                           <div className='normal_padding'>
-                            Claim ID : {elementInRes._id}
+                            <strong>Claim ID :</strong> {elementInRes._id}
                           </div>
                           <div className="vr"></div>
-                          <div className='normal_padding'>
-                            user name {elementInRes.user_id}
-                          </div>
+                          {/* <div className='normal_padding'>
+                           <strong>User :</strong>  {user.username}
+                          </div> */}
                           <div className='normal_padding thin_text'>
-                            Submitted: {elementInRes.submitted_time}
+                            <strong>Submitted :</strong> {elementInRes.submitted_time}
                           </div>
+
+                          <div>
+
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                              Action
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">Action</a></li>
+                              <li><a class="dropdown-item" href="#">Another action</a></li>
+                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              <li><hr class="dropdown-divider" /></li>
+                              <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+
+                          </div>
+
                         </button>
 
 
@@ -300,7 +335,7 @@ function Claim() {
                             <div className="col-lg-6">
                               <div className="card">
                                 <div className="card-body">
-                                  <h5 className="card-title">First Notice of Loss</h5>
+                                  <h5 className="card-title text-center">First Notice of Loss</h5>
                                   <div className="row">
                                     <div className="col-4 text-center">
                                       <strong>
@@ -308,7 +343,7 @@ function Claim() {
                                       </strong>
                                     </div>
                                     <div className="col-8">
-                                      name from db
+                                      {user.username}
                                     </div>
                                   </div>
                                   <div className="row">
@@ -318,17 +353,17 @@ function Claim() {
                                       </strong>
                                     </div>
                                     <div className="col-8">
-                                      id from db
+                                      {elementInRes.user_id}
                                     </div>
                                   </div>
                                   <div className="row">
                                     <div className="col-4 text-center">
                                       <strong>
-                                        Type of Loss
+                                        Loss coverage
                                       </strong>
                                     </div>
                                     <div className="col-8">
-                                      type from db
+                                      {elementInRes.damage_coverage}
                                     </div>
                                   </div>
                                   <div className="row">
@@ -338,7 +373,7 @@ function Claim() {
                                       </strong>
                                     </div>
                                     <div className="col-8">
-                                      name from db
+                                      {elementInRes.submitted_time}
                                     </div>
                                   </div>
                                 </div>
@@ -350,7 +385,7 @@ function Claim() {
 
                               <div className="card">
                                 <div className="card-body">
-                                  <h5 className="card-title">Address of Loss</h5>
+                                  <h5 className="card-title text-center">Address of Loss</h5>
                                   <div className="row">
                                     <div className="col-4 text-center">
                                       <strong>
@@ -394,16 +429,41 @@ function Claim() {
                                 </div>
                               </div>
                             </div>
+
                             <div className="col">
                               <div className="card">
                                 <div className="card-body">
-                                  <h5 className="card-title">Additional Evidence</h5>
-                                  
+                                  <h5 className="card-title text-center">Description of the damage</h5>
+                                  {elementInRes.description}
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <div className="col">
+                              <div className="card">
+                                <div className="card-body">
+                                  <h5 className="card-title text-center">Additional Evidence</h5>
+
                                   <img src={elementInRes.file} alt="" style={{ width: '300px', height: '300px' }} />
                                 </div>
                               </div>
 
                             </div>
+
+
+                            {/* <div class="btn-group">
+                              <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Action
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                              </ul>
+                            </div> */}
 
                           </div>
 

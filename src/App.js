@@ -13,6 +13,8 @@ import EmProfile from './pages/EmProfile';
 import AdminClaim from './pages/Admin_Claim';
 import PolicyService from './pages/PolicyService';
 import AdminPolicy from './pages/Admin_Policies';
+import Message from './pages/Message';
+import Checkout from './pages/Checkout';
 
 
 
@@ -27,6 +29,9 @@ const router = createBrowserRouter(
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/policyservice' element={<PolicyService />} />
+        <Route path='/message' element={<Message />} />
+        <Route path='/checkout' element={<Checkout />} />
+        
       </Route>
 
       <Route path='/admin' element={<AdminLayout />}>

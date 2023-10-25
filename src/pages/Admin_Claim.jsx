@@ -5,14 +5,14 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 
 function Admin_Claim() {
-    let loop = [
-        {
-            "name": "ryan"
-        },
-        {
-            "name": "ABCD"
-        }
-    ]
+    // let loop = [
+    //     {
+    //         "name": "ryan"
+    //     },
+    //     {
+    //         "name": "ABCD"
+    //     }
+    // ]
 
     const [data, setData] = useState([])
 
@@ -59,13 +59,13 @@ function Admin_Claim() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to={'/admin/emprofile'} data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                                    <Link to={'/admin/emprofile'} className="nav-link px-0 align-middle">
                                         <i className="fs-4 bi-speedometer2"></i>
                                         <span className="ms-1 d-none d-sm-inline">My Profile</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to={'/admin/emprofile'} data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                                    <Link to={'/admin/emprofile'} className="nav-link px-0 align-middle">
                                         <i className="fs-4 bi-speedometer2"></i>
                                         <span className="ms-1 d-none d-sm-inline">Claim Settled</span>
                                     </Link>
@@ -133,12 +133,29 @@ function Admin_Claim() {
                                                         </div>
                                                         <div className="vr"></div>
                                                         <div className='normal_padding'>
-                                                            user name {elementInRes.user_id}
+                                                            user name : {elementInRes.user_name}
                                                         </div>
                                                         <div className='normal_padding thin_text'>
-                                                            Submitted: 12-23-22 14:00 pm {elementInRes.date_time}
+                                                            Submitted: {elementInRes.submitted_time}
+                                                        </div>
+                                                        <div>
+
+                                                            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Update Progress Status
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item" href="#">Processing</a></li>
+                                                                <li><a class="dropdown-item" href="#">On Hold</a></li>
+                                                                <li><a class="dropdown-item" href="#">Evidence verification</a></li>
+                                                                <li><a class="dropdown-item" href="#">Finalising</a></li>
+                                                                <li><hr class="dropdown-divider" /></li>
+                                                                <li><a class="dropdown-item" href="#">Review Done</a></li>
+                                                                <li><a class="dropdown-item" href="#">Claim Settled</a></li>
+                                                            </ul>
+
                                                         </div>
                                                     </button>
+
 
 
 
