@@ -291,7 +291,8 @@ function Claim() {
 
 
 
-                  {data.map((elementInRes, index) => (
+                  {data.map((elementInRes, index) => 
+                  (
                     <div className="accordion-item accordion_design" key={index}>
                       <h2 className="accordion-header" id={"panelsStayOpen-headingOne" + index}>
 

@@ -125,7 +125,7 @@ h6 {
 # Override some default Bootstrap stylings
 --------------------------------------------------------------*/
 /* Dropdown menus */
-/* .dropdown-menu {
+.dropdown-menu {
   border-radius: 4px;
   padding: 10px 0;
   -webkit-animation-name: dropdown-animate;
@@ -136,6 +136,9 @@ h6 {
   animation-fill-mode: both;
   border: 0;
   box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
+}
+.dropdown:checked + .dropdown-menu {
+  display: block;
 }
 
 .dropdown-menu .dropdown-header,
@@ -216,7 +219,7 @@ h6 {
   0% {
     opacity: 0;
   }
-} */
+}
 
 /* Light Backgrounds */
 .bg-primary-light {

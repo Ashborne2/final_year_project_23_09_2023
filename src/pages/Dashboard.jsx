@@ -5,6 +5,10 @@ import logo from "../dash-asset/img/radiant.png";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
+
+
+
+
   return (
     <>
       {/* <header
@@ -46,33 +50,38 @@ const Dashboard = () => {
               <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                 <li class="nav-item">
                   <Link to={'/admin'} class="nav-link align-middle px-0">
-                    <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">
-              Dashboard
-            </span>
+                    {/* <i class="fs-4 bi-house"></i> */}
+                    <span class="ms-1 d-none d-sm-inline">
+                      Dashboard
+                    </span>
                   </Link>
                 </li>
                 <li>
                   <Link to={'/admin/emprofile'} class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">My Profile</span> </Link>
+                    {/* <i class="fs-4 bi-speedometer2"></i>  */}
+                    <span class="ms-1 d-none d-sm-inline">My Profile</span> </Link>
                 </li>
                 <li>
                   <Link to={'/admin/admin_claim'} class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Manage Claims</span></Link>
+                    {/* <i class="fs-4 bi-table"></i>  */}
+                    <span class="ms-1 d-none d-sm-inline">Manage Claims</span></Link>
                 </li>
-                
+
                 <li>
                   <Link to={'/admin/admin_policy'} class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Policies</span> </Link>
+                    {/* <i class="fs-4 bi-grid"></i>  */}
+                    <span class="ms-1 d-none d-sm-inline">Policies</span> </Link>
                 </li>
                 <li>
                   <Link to={'#'} class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Messages</span> </Link>
+                    {/* <i class="fs-4 bi-people"></i>  */}
+                    <span class="ms-1 d-none d-sm-inline">Messages</span> </Link>
                 </li>
               </ul>
               <hr />
               <div class="dropdown pb-5">
-                <Link to={"#"} class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src={logo} alt="my profile image" width="30" height="30" class="rounded-circle" />
+                <Link className="d-flex align-items-center text-white text-decoration-none dropdown-toggle show" id="dropdownUser1" data-bs-toggle="show" aria-expanded="false">
+                  {/* <img src={logo} alt="my profile image" width="30" height="30" class="rounded-circle" /> */}
                   <span class="d-none d-sm-inline mx-1">My profile</span>
                 </Link>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
@@ -270,6 +279,17 @@ const Dashboard = () => {
                             <h5 class="card-title">
                               Performance evaluation <span>| Charts</span>
                             </h5>
+
+                            <div class="dropdown">
+                              <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown button
+                              </button>
+                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              </ul>
+                            </div>
 
                             {/* <table class="table table-borderless">
                         <thead>

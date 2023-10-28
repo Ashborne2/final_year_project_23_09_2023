@@ -1,7 +1,62 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import Axios from 'axios';
+import { toast } from 'react-hot-toast';
+import { useEffect } from 'react';
 
 function Admin_Policies() {
+    const [PFormData, setFormData] = useState({});
+    const [file, setFile] = useState([]);
+    const [data, setData] = useState([])
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await Axios.get('http://localhost:5000/getpolicy');
+            console.log(result.data.data);
+            setData(result.data.data);
+        };
+        fetchData();
+
+    }, []);
+
+
+    const handleChange = (e) => {
+        console.log(e.target.value);
+        setFormData({
+            ...PFormData,
+            [e.target.name]: e.target.value
+        })
+    };
+
+    const onFileChange = (e) => {
+        setFile(e.target.files[0])
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        let formData = new FormData();
+        formData.append('file', file);
+        formData.append('policydata', JSON.stringify(PFormData));
+
+        let Response = await Axios.post('http://localhost:5000/policy', formData);
+
+        if (Response.data['status'] === 'failed') {
+            toast.error(Response.data['message'])
+        } else if (Response.data['status'] === 'success') {
+            toast.success(Response.data['message'])
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
+        }
+
+        // console.log(FormData);
+    };
+
+
+
     return (
         <>
 
@@ -85,61 +140,67 @@ function Admin_Policies() {
                                     <div class="col">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title">Floating labels Form</h5>
+                                                <h5 class="card-title">Add New Insurance Coverage Service</h5>
 
 
-                                                <form class="row g-3">
+                                                <form class="row g-3" method="post" enctype="multipart/form-data">
                                                     <div class="col-md-12">
                                                         <div class="form-floating">
-                                                            <input type="text" class="form-control" id="floatingName" placeholder="Your Name" />
-                                                            <label for="floatingName">Your Name</label>
+                                                            <input onChange={handleChange} name="Coverage" type="text" class="form-control" id="floatingName" placeholder="Coverage Name" />
+                                                            <label for="floatingName">Coverage Name</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    {/* <div class="col-md-6">
                                                         <div class="form-floating">
                                                             <input type="email" class="form-control" id="floatingEmail" placeholder="Your Email" />
                                                             <label for="floatingEmail">Your Email</label>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-6">
+                                                    </div> */}
+                                                    {/* <div class="col-md-6">
                                                         <div class="form-floating">
                                                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
                                                             <label for="floatingPassword">Password</label>
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="col-12">
                                                         <div class="form-floating">
-                                                            <textarea class="form-control" placeholder="Address" id="floatingTextarea" style={{ height: "100px" }}></textarea>
-                                                            <label for="floatingTextarea">Address</label>
+                                                            <textarea onChange={handleChange} name='description' class="form-control" placeholder="Description of the coverage" id="floatingTextarea" style={{ height: "100px" }}></textarea>
+                                                            <label for="floatingTextarea">Description of the coverage</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="col-md-12">
                                                             <div class="form-floating">
-                                                                <input type="text" class="form-control" id="floatingCity" placeholder="City" />
-                                                                <label for="floatingCity">City</label>
+                                                                <input onChange={handleChange} name='Price' type="text" class="form-control" id="floatingCity" placeholder="Pricing" data-bs-toggle="tooltip" data-bs-placement="left" title="The pricing is in $" />
+                                                                <label for="floatingCity">Price</label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6">
                                                         <div class="form-floating mb-3">
-                                                            <select class="form-select" id="floatingSelect" aria-label="State">
-                                                                <option selected>New York</option>
-                                                                <option value="1">Oregon</option>
-                                                                <option value="2">DC</option>
+                                                            <select onChange={handleChange} name='Duration' class="form-select" id="floatingSelect" aria-label="Duration">
+                                                                <option selected>Select a Duration</option>
+                                                                <option value="1 year">1 year</option>
+                                                                <option value="2 years">2 years</option>
+                                                                <option value="5 years">5 years</option>
+                                                                <option value="10 years">10 years</option>
+                                                                <option value="Lifetime">Lifetime</option>
                                                             </select>
-                                                            <label for="floatingSelect">State</label>
+                                                            <label for="floatingSelect">Duration</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-floating">
-                                                            <input type="text" class="form-control" id="floatingZip" placeholder="Zip" />
-                                                            <label for="floatingZip">Zip</label>
+                                                    <div class="col-12">
+
+                                                        <div class="mb-3">
+                                                            <label for="formFile" class="form-label">Insert Logo</label>
+                                                            <input onChange={onFileChange} class="form-control" type="file" id="formFile" />
                                                         </div>
+
+
                                                     </div>
                                                     <div class="text-center">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                        <button type="reset" class="btn btn-secondary">Reset</button>
+                                                        <button onClick={handleSubmit} type="submit" class="btn btn-primary">Submit</button>
+                                                        {/* <button type="reset" class="btn btn-secondary">Reset</button> */}
                                                     </div>
                                                 </form>
 
@@ -156,6 +217,50 @@ function Admin_Policies() {
                                             </ul>
                                         </p>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Current Policies</h5>
+
+
+                                                <table class="table table-dark">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Coverage Name</th>
+                                                            <th scope="col">Description</th>
+                                                            <th scope="col">Duration</th>
+                                                            <th scope="col">Price</th>
+                                                            <th scope="col">Image</th>
+                                                        </tr>
+                                                    </thead>
+                                                    {data.map((item, index) => (
+                                                        <tbody>
+                                                            <tr key={index}>
+                                                                <th scope="row" style={{width:"50px"}}>{item._id}</th>
+                                                                <td style={{width:"100px"}}>{item.Coverage}</td>
+                                                                <td style={{width:"100px"}}>{item.description}</td>
+                                                                <td style={{width:"100px"}}>{item.Duration}</td>
+                                                                <td style={{width:"100px"}}>${item.Price}</td>
+                                                                <td style={{width:"100px",height:"100px"}}><img src={item.file} alt="" style={{ width: '100px', height: '100px' }} /></td>
+                                                            </tr>                                                            
+
+                                                        </tbody>
+                                                    )
+                                                    )}
+
+                                                </table>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
                                 </div>
 
 

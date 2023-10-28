@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 const AdminLayout = () => {
     return (
@@ -10,6 +11,7 @@ const AdminLayout = () => {
         <main>
         <Outlet />
         </main>
+        <Toaster position="top-center"/>
       </div>
     );
   };
