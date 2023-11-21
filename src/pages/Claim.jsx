@@ -34,6 +34,7 @@ function Claim() {
 
   const claimdata = {
     "user_id": user._id,
+    "username": user.username,
     "broker_name": claimFormData.name,
     "insurance_id": claimFormData.Insurance_ID,
     "policy_code": claimFormData.Policy_Code,
@@ -302,9 +303,9 @@ function Claim() {
                             <strong>Claim ID :</strong> {elementInRes._id}
                           </div>
                           <div className="vr"></div>
-                          {/* <div className='normal_padding'>
+                          <div className='normal_padding'>
                            <strong>User :</strong>  {user.username}
-                          </div> */}
+                          </div>
                           <div className='normal_padding thin_text'>
                             <strong>Submitted :</strong> {elementInRes.submitted_time}
                           </div>

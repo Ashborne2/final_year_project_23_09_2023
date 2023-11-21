@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Axios from 'axios'
+import toast from 'react-hot-toast';
 
 function Checkout() {
   const [FormData, setFormData] = useState({});
+  const user = JSON.parse(localStorage.getItem('user'));
+  const [selectedProduct, setSelectedProduct] = useState([]);
+
+  useEffect(() => {
+
+    const selectedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
+    console.log(selectedProduct);
+    setSelectedProduct(selectedProduct);
+
+
+  }, []);
 
   const handleChange = (e) => {
     console.log([e.target.name], e.target.value)
@@ -18,11 +30,11 @@ function Checkout() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // let Response = await Axios.post('http://localhost:5000/checkout', FormData);
+    let Response = await Axios.post('http://localhost:5000/checkout', FormData);
     // if (Response.data['status'] === 'failed') {
-    //   alert(Response.data.message);
+    //   toast.error(Response.data.message);
     // } else if (Response.data['status'] === 'success') {
-    //   alert(Response.data.message); 
+    //   toast.success(Response.data.message);
     // }
 
     console.log(FormData);
@@ -48,8 +60,7 @@ function Checkout() {
 
                           <div class="d-flex justify-content-between align-items-center mb-4">
                             <div>
-                              <p class="mb-1">Your selected services</p>
-                              <p class="mb-0"><strong>You have 4 items in your cart</strong></p>
+                              <p class="mb-1">Your selected services</p>                              
                             </div>
                             {/* <div>
                     <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!"
@@ -63,20 +74,20 @@ function Checkout() {
                                 <div class="d-flex flex-row align-items-center">
                                   <div>
                                     <img
-                                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                      src={selectedProduct.file}
                                       class="img-fluid rounded-3" alt="Shopping item" style={{ width: "65px" }} />
                                   </div>
                                   <div class="ms-3">
-                                    <h5>Iphone 11 pro</h5>
-                                    <p class="small mb-0">256GB, Navy Blue</p>
+                                    <h5>{selectedProduct.Coverage}</h5>
+                                    <p class="small mb-0">{selectedProduct.Duration}</p>
                                   </div>
                                 </div>
                                 <div class="d-flex flex-row align-items-center">
                                   <div style={{ width: "50px" }}>
-                                    <h5 class="fw-normal mb-0">2</h5>
+                                    <h5 class="fw-normal mb-0"> Cost: </h5>
                                   </div>
                                   <div style={{ width: "80px" }}>
-                                    <h5 class="mb-0">$900</h5>
+                                    <h5 class="mb-0">$ {selectedProduct.Price}</h5>
                                   </div>
                                   <a href="#!" style={{ color: "#cecece" }}><i class="fas fa-trash-alt"></i></a>
                                 </div>
@@ -84,86 +95,6 @@ function Checkout() {
                             </div>
                           </div>
 
-                          <div class="card mb-3">
-                            <div class="card-body">
-                              <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row align-items-center">
-                                  <div>
-                                    <img
-                                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                      class="img-fluid rounded-3" alt="Shopping item" style={{ width: "65px" }} />
-                                  </div>
-                                  <div class="ms-3">
-                                    <h5>Samsung galaxy Note 10 </h5>
-                                    <p class="small mb-0">256GB, Navy Blue</p>
-                                  </div>
-                                </div>
-                                <div class="d-flex flex-row align-items-center">
-                                  <div style={{ width: "50px" }}>
-                                    <h5 class="fw-normal mb-0">2</h5>
-                                  </div>
-                                  <div style={{ width: "80px" }}>
-                                    <h5 class="mb-0">$900</h5>
-                                  </div>
-                                  <a href="#!" style={{ color: "#cecece" }}><i class="fas fa-trash-alt"></i></a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="card mb-3">
-                            <div class="card-body">
-                              <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row align-items-center">
-                                  <div>
-                                    <img
-                                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img3.webp"
-                                      class="img-fluid rounded-3" alt="Shopping item" style={{ width: "65px" }} />
-                                  </div>
-                                  <div class="ms-3">
-                                    <h5>Canon EOS M50</h5>
-                                    <p class="small mb-0">Onyx Black</p>
-                                  </div>
-                                </div>
-                                <div class="d-flex flex-row align-items-center">
-                                  <div style={{ width: "50px" }}>
-                                    <h5 class="fw-normal mb-0">1</h5>
-                                  </div>
-                                  <div style={{ width: "80px" }}>
-                                    <h5 class="mb-0">$1199</h5>
-                                  </div>
-                                  <a href="#!" style={{ color: "#cecece" }}><i class="fas fa-trash-alt"></i></a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="card mb-3 mb-lg-0">
-                            <div class="card-body">
-                              <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row align-items-center">
-                                  <div>
-                                    <img
-                                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img4.webp"
-                                      class="img-fluid rounded-3" alt="Shopping item" style={{ width: "65px" }} />
-                                  </div>
-                                  <div class="ms-3">
-                                    <h5>MacBook Pro</h5>
-                                    <p class="small mb-0">1TB, Graphite</p>
-                                  </div>
-                                </div>
-                                <div class="d-flex flex-row align-items-center">
-                                  <div style={{ width: "50px" }}>
-                                    <h5 class="fw-normal mb-0">1</h5>
-                                  </div>
-                                  <div style={{ width: "80px" }}>
-                                    <h5 class="mb-0">$1799</h5>
-                                  </div>
-                                  <a href="#!" style={{ color: "#cecece" }}><i class="fas fa-trash-alt"></i></a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
 
                         </div>
                         <div class="col-lg-5">

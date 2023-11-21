@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import Footer from './component/Footer';
 import AdminLayout from './pages/AdminLayout';
+
 import Claim from './pages/Claim';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
@@ -28,9 +29,13 @@ const router = createBrowserRouter(
         <Route path='/claim' element={<Claim />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        
         <Route path='/policyservice' element={<PolicyService />} />
-        <Route path='/message' element={<Message />} />
         <Route path='/checkout' element={<Checkout />} />
+        
+        
+        <Route path='/message' element={<Message />} />
+        
         
       </Route>
 

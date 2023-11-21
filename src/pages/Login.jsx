@@ -22,15 +22,31 @@ const Login = () => {
         // alert(response.data['message'])
         console.log(Response)
       } else if (response.data['status'] === 'success') {
-        // alert(response.data['message'])
-        toast.success(response.data['user']['username']+" "+response.data['message'])
-        const user = response.data['user']
 
-        localStorage.setItem('token', response.data['token'])
-        localStorage.setItem('user', JSON.stringify(user))
-        navigate('/')
-        window.location.reload();
-        
+        if (response.data['user']['userType'] === 'Employee') {
+          toast.success(response.data['user']['username'] + " " + response.data['message'])
+          const user = response.data['user']
+          localStorage.setItem('token', response.data['token'])
+          localStorage.setItem('user', JSON.stringify(user))
+          navigate('/admin')
+          window.location.reload();
+        } else if (response.data['user']['userType'] === 'Customer') {
+          toast.success(response.data['user']['username'] + " " + response.data['message'])
+          const user = response.data['user']
+          localStorage.setItem('token', response.data['token'])
+          localStorage.setItem('user', JSON.stringify(user))
+          navigate('/')
+          window.location.reload();
+        }
+        // alert(response.data['message'])
+
+        // const user = response.data['user']
+
+        // localStorage.setItem('token', response.data['token'])
+        // localStorage.setItem('user', JSON.stringify(user))
+        // navigate('/')
+        // window.location.reload();
+
       }
 
     } catch (e) {

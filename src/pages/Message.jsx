@@ -1,6 +1,24 @@
 import React from 'react'
+import { useState,useEffect } from 'react'
 
 function Message() {
+    const [data, setData] = useState([])
+    const [claimFormData, setClaimFormData] = useState({})
+
+const handleChange = (e) => {
+
+    setData({
+      ...claimFormData,
+      [e.target.name]: e.target.value
+    })
+  };
+
+
+
+
+
+
+
     return (
         <>
             <main id="main">
