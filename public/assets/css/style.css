@@ -1,4 +1,4 @@
-
+/* #040522b0 */
 
 /*--------------------------------------------------------------
 # General
@@ -124,11 +124,12 @@ h6 {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
+  background: #05062cb0 !important;
 }
 
 #header.header-scrolled,
 #header.header-inner-pages {
-  /* background: rgba(24, 6, 185, 0.8); */
+  
   background: #7d2fe0;
   padding: 12px 0;
 }

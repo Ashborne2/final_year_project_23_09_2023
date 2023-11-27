@@ -6,10 +6,13 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Toast } from "bootstrap";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 export const Navbar = () => {
+  const navigate = useNavigate();
   const [isloggedin, setIsLoggedin] = useState(false);
+  const [username, setUsername] = useState("");
 
 
   useEffect(() => {     // Retrieve the token from local storage     
@@ -18,7 +21,7 @@ export const Navbar = () => {
       // You may want to implement token validation here       
       // For simplicity, we'll assume a token is valid if it exists       
       setIsLoggedin(true);
-      
+      setUsername(JSON.parse(localStorage.getItem('user')).username);
       
     } else {
       setIsLoggedin(false);
@@ -30,8 +33,13 @@ export const Navbar = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setIsLoggedin(false);
+
+    setTimeout(() => {
+      navigate('/login');
+      toast.success("Logged Out Successfully")
+    }, 800);
     // window.location.reload();
-    toast.success("Logged Out Successfully")
+    
   };
 
 
@@ -76,9 +84,10 @@ export const Navbar = () => {
               {/* <li><a className="nav-link scrollto" href="#about">About</a></li> */}
               <li><NavLink  className="nav-link scrollto" activeclassName="active" to={"/policyservice"}>Policy Services</NavLink></li>
               <li><NavLink to={"/claim"} className="nav-link scrollto" activeclassName="active" >Claims</NavLink></li>
-
-              <li><NavLink to={"/message"} className="nav-link scrollto" activeclassName="active" >Messages</NavLink></li>
+              <li><NavLink to={"/message"} className="nav-link scrollto" activeclassName="active" >Messages</NavLink></li>              
               <li><NavLink onClick={handleLogout} className="getstarted scrollto">Log Out</NavLink></li>
+              <li style={{color:"white"}}><strong>{username}</strong></li>
+              <img src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png" class="rounded-circle shadow-4" style={{ width: "40px",marginLeft:"10px" }} alt="avatar" />
               <i className="bi bi-list mobile-nav-toggle" onClick={handleClick} ></i>
             </ul>
           ) : (

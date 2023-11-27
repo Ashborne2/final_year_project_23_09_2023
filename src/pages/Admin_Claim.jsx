@@ -17,7 +17,6 @@ function Admin_Claim() {
     const [data, setData] = useState([])
     
 
-
     
 
     useEffect(() => {

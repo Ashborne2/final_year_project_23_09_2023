@@ -61,32 +61,12 @@ const Home = () => {
 
         <div class="row counters">
 
-          {/* <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Clients</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Projects</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Hours Of Support</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Hard Workers</p>
-          </div> */}
-
         </div>
 
       </div>
     </section>
 
-    <section id="services" class="services section-bg">
+    {/* <section id="services" class="services section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -176,7 +156,7 @@ const Home = () => {
         </div>
 
       </div>
-    </section>
+    </section> */}
 
     <section id="features" class="features">
       <div class="container" data-aos="fade-up">
@@ -240,7 +220,7 @@ const Home = () => {
                 <li class="na">Massa ultricies mi</li>
               </ul>
               <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
+                <button class="btn-buy">Buy Now</button>
               </div>
             </div>
           </div>
@@ -257,7 +237,7 @@ const Home = () => {
                 <li class="na">Massa ultricies mi</li>
               </ul>
               <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
+                <button class="btn-buy">Buy Now</button>
               </div>
             </div>
           </div>
@@ -274,7 +254,7 @@ const Home = () => {
                 <li>Massa ultricies mi</li>
               </ul>
               <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
+                <button class="btn-buy">Buy Now</button>
               </div>
             </div>
           </div>
@@ -292,7 +272,7 @@ const Home = () => {
                 <li>Massa ultricies mi</li>
               </ul>
               <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
+                <button class="btn-buy">Buy Now</button>
               </div>
             </div>
           </div>
@@ -363,7 +343,7 @@ const Home = () => {
       </div>
     </section>
 
-    <section id="contact" class="contact section-bg">
+    {/* <section id="contact" class="contact section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -432,7 +412,7 @@ const Home = () => {
         </div>
 
       </div>
-    </section>
+    </section> */}
 
   </main>
 
