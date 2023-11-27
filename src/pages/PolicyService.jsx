@@ -2,13 +2,20 @@ import React, { useEffect } from 'react';
 import { Link, redirect } from 'react-router-dom';
 import { useState } from 'react';
 import Axios from 'axios';
+import toast from 'react-hot-toast';
 
 
 const PolicyServices = () => {
     const [data, setData] = useState([])
     const [selectedProduct, setSelectedProduct] = useState([]);
 
-    const handleClick=(item)=>{
+
+    const fetchData = async () => {
+        // Your fetchData function implementation
+        localStorage.getItem('selectedProduct')
+    };
+
+    const handleClick = (item) => {
         // e.preventDefault();
 
         // setSelectedProduct(item);
@@ -16,9 +23,19 @@ const PolicyServices = () => {
         // console.log({[e.target.key]:e.target.value})
         localStorage.setItem('selectedProduct', JSON.stringify(item))
         // console.log(selectedProduct)
+        const myPromise = fetchData();
+
+        toast.promise(myPromise, {
+            loading: 'Loading',
+            success: 'Redirecting to checkout',
+            error: 'Error when fetching',
+        });
+
+
         setTimeout(() => {
             window.location.href = "/checkout"; //will redirect to your checkout page
-          }, 3000);
+
+        }, 3000);
 
     }
 
@@ -72,7 +89,7 @@ const PolicyServices = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 )
 
 
