@@ -6,6 +6,7 @@ import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 // import { getYear, range } from 'react-datepicker';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const [formData, setFormData] = useState({});
@@ -51,16 +52,46 @@ const Register = () => {
     //   }
     // })
     // const data = await response.json();
-    let response = await Axios.post('http://localhost:5000/register', userdata)
 
-    if (response.data['status'] === 'new user created') {
-      alert('new user created')
-      navigate('/login')
-    } else if (response.data['status'] === 'user already exists') {
-      alert('user already exists')
+
+    if (
+      userdata.fName === undefined || userdata.fName === '' ||
+      userdata.lName === undefined || userdata.lName === '' ||
+      userdata.dob === undefined || userdata.dob === '' ||
+      userdata.email === undefined || userdata.email === '' ||
+      userdata.username === undefined || userdata.username === '' ||
+      userdata.password === undefined || userdata.password === '' ||
+      userdata.phone === undefined || userdata.phone === '' ||
+      userdata.userType === undefined || userdata.userType === '' ||
+      userdata.address === undefined || userdata.address === '' ||
+      userdata.nin === undefined || userdata.nin === ''
+    ) {
+      toast.error("Please fill all the fields")
+    } else {
+
+      let response = await Axios.post('http://localhost:5000/register', userdata)
+
+      if (response.data['status'] === 'new user created') {
+        toast.success(response.data['message'])
+        setTimeout(() => {
+          navigate('/login')
+        }, 3000);
+        
+      } else if (response.data['status'] === 'user already exists') {
+        toast.error(response.data['message'])
+      }
+
     }
+    // let response = await Axios.post('http://localhost:5000/register', userdata)
 
-    // navigate('/login')
+    // if (response.data['status'] === 'new user created') {
+    //   alert('new user created')
+    //   navigate('/login')
+    // } else if (response.data['status'] === 'user already exists') {
+    //   alert('user already exists')
+    // }
+
+
 
   };
 
@@ -84,7 +115,7 @@ const Register = () => {
 
   return (
     <div><main>
-      <div class="container">
+      <div class="container extraroom">
 
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
           <div class="container">
@@ -111,12 +142,12 @@ const Register = () => {
                               type="text"
                               name="firstName"
                               class="form-control"
-                              id="floatingInputGrid"
+                              id="floatingInputGrid 1"
                               onChange={handleChange}
                               placeholder="name@example.com"
-                            
+
                             />
-                            <label for="floatingInputGrid">First Name</label>
+                            <label for="floatingInputGrid 1">First Name</label>
                           </div>
                         </div>
 
@@ -126,11 +157,11 @@ const Register = () => {
                               type="text"
                               name="lastName"
                               class="form-control"
-                              id="floatingInputGrid"
+                              id="floatingInputGrid 2"
                               onChange={handleChange}
                               placeholder="name@example.com"
                             />
-                            <label for="floatingInputGrid">Last Name</label>
+                            <label for="floatingInputGrid 2">Last Name</label>
                           </div>
                         </div>
                       </div>
@@ -247,13 +278,13 @@ const Register = () => {
                         <input
                           type="text"
                           class="form-control"
-                          id="floatingPassword"
+                          id="floatingPassword 1"
                           placeholder='National ID Number'
                           name='nin'
                           onChange={handleChange}
                         />
-                        
-                        <label for="floatingPassword">National ID Number</label>
+
+                        <label for="floatingPassword 1">National ID Number</label>
                       </div>
 
 

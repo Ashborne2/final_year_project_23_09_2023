@@ -17,8 +17,8 @@ const Home = () => {
 <div class="container-fluid" data-aos="fade-up">
   <div class="row justify-content-center">
     <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-      <h1>Insurance For Your <br/> Future</h1>
-      <h2>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid excepturi repellat, laudantium</h2>
+      <h1>Insurance For Your <br/> Car</h1>
+      <h2>No speed limits on our service</h2>
       <div><a href="#about" class="btn-get-started scrollto">Get Started</a></div>
     </div>
     <div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">

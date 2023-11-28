@@ -11,10 +11,9 @@ function Claim() {
   const [file, setFile] = useState([]);
   const user = JSON.parse(localStorage.getItem('user'));
 
+  const [isdata, setIsData] = useState(false);
 
-  // validation
-
-  // on init state
+  
   useEffect(() => {
 
     Axios.get('http://localhost:5000/prClaims/' + user._id)
@@ -23,6 +22,9 @@ function Claim() {
         let userdata = Object.values(res.data.data)
         console.log(userdata)
         setData(userdata)
+        if (userdata.length > 0) {
+          setIsData(true)
+        }
       })
       .catch(err => {
         console.log(err)
@@ -59,8 +61,6 @@ function Claim() {
   // submit the claim 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
     const validateForm = () => {
       let isValid = true;
 
@@ -77,12 +77,9 @@ function Claim() {
         isValid = false;
         toast.error("Please fill in all the required fields.");
       }
-
       return isValid;
     };
 
-
-    
     try {(validateForm())
       let formData = new FormData();
 
@@ -329,9 +326,7 @@ function Claim() {
               <div className="accordion_wrapper">
                 <div className="accordion" id="accordionPanelsStayOpenExample">
 
-
-
-                  {data.map((elementInRes, index) =>
+{isdata ? (data.map((elementInRes, index) =>
                   (
                     <div className="accordion-item accordion_design" key={index}>
                       <h2 className="accordion-header" id={"panelsStayOpen-headingOne" + index}>
@@ -512,7 +507,182 @@ function Claim() {
                       </div>
                     </div>
                   )
+                  )):(
+
+                    <span className="text-center">You have no claims yet</span>
                   )}
+
+                  {/* {data.map((elementInRes, index) =>
+                  (
+                    <div className="accordion-item accordion_design" key={index}>
+                      <h2 className="accordion-header" id={"panelsStayOpen-headingOne" + index}>
+
+
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={"#panelsStayOpen-collapseOne" + index} aria-expanded="false" aria-controls={"panelsStayOpen-collapseOne" + index}>
+                          <div className='normal_padding'>
+                            <strong>Claim ID :</strong> {elementInRes._id}
+                          </div>
+                          <div className="vr"></div>
+                          <div className='normal_padding'>
+                            <strong>User :</strong>  {user.username}
+                          </div>
+                          <div className='normal_padding thin_text'>
+                            <strong>Submitted :</strong> {elementInRes.submitted_time}
+                          </div>
+
+                          <div>
+
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                              Action
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">Action</a></li>
+                              <li><a class="dropdown-item" href="#">Another action</a></li>
+                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              <li><hr class="dropdown-divider" /></li>
+                              <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+
+                          </div>
+
+                        </button>
+
+
+
+                      </h2>
+                      <div id={"panelsStayOpen-collapseOne" + index} className="accordion-collapse collapse " aria-labelledby={"panelsStayOpen-headingOne" + index}>
+                        <div className="accordion-body">
+
+                          <div className="row">
+                            <div className="col-lg-6">
+                              <div className="card">
+                                <div className="card-body">
+                                  <h5 className="card-title text-center">First Notice of Loss</h5>
+                                  <div className="row">
+                                    <div className="col-4 text-center">
+                                      <strong>
+                                        Username
+                                      </strong>
+                                    </div>
+                                    <div className="col-8">
+                                      {user.username}
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-4 text-center">
+                                      <strong>
+                                        User Id
+                                      </strong>
+                                    </div>
+                                    <div className="col-8">
+                                      {elementInRes.user_id}
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-4 text-center">
+                                      <strong>
+                                        Loss coverage
+                                      </strong>
+                                    </div>
+                                    <div className="col-8">
+                                      {elementInRes.damage_coverage}
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-4 text-center">
+                                      <strong>
+                                        Date Notified
+                                      </strong>
+                                    </div>
+                                    <div className="col-8">
+                                      {elementInRes.submitted_time}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+
+                            <div className="col-lg-6">
+
+                              <div className="card">
+                                <div className="card-body">
+                                  <h5 className="card-title text-center">Address of Loss</h5>
+                                  <div className="row">
+                                    <div className="col-4 text-center">
+                                      <strong>
+                                        Location Type
+                                      </strong>
+                                    </div>
+                                    <div className="col-8">
+                                      street
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-4 text-center">
+                                      <strong>
+                                        Address 1
+                                      </strong>
+                                    </div>
+                                    <div className="col-8">
+                                      address from db
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-4 text-center">
+                                      <strong>
+                                        Address 2
+                                      </strong>
+                                    </div>
+                                    <div className="col-8">
+                                      address from db
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-4 text-center">
+                                      <strong>
+                                        City
+                                      </strong>
+                                    </div>
+                                    <div className="col-8">
+                                      name from db
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="col">
+                              <div className="card">
+                                <div className="card-body">
+                                  <h5 className="card-title text-center">Description of the damage</h5>
+                                  {elementInRes.description}
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <div className="col">
+                              <div className="card">
+                                <div className="card-body">
+                                  <h5 className="card-title text-center">Additional Evidence</h5>
+
+                                  <img src={elementInRes.file} alt="" style={{ width: '300px', height: '300px' }} />
+                                </div>
+                              </div>
+
+                            </div>
+
+
+                          
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  )
+                  )} */}
 
 
 

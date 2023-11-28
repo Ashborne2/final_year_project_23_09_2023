@@ -13,8 +13,6 @@ const Login = () => {
   async function submit(e) {
     e.preventDefault();
 
-
-
     try {
 
       if (username === '' || password === '') {
@@ -23,10 +21,8 @@ const Login = () => {
 
         let response = await Axios.post('http://localhost:5000/login', { username, password });
 
-
         if (response.data['status'] === 'failed') {
           toast.error(response.data['message'])
-          // alert(response.data['message'])
           console.log(Response)
         } else if (response.data['status'] === 'success') {
   
@@ -45,14 +41,6 @@ const Login = () => {
             navigate('/')
             window.location.reload();
           }
-          // alert(response.data['message'])
-  
-          // const user = response.data['user']
-  
-          // localStorage.setItem('token', response.data['token'])
-          // localStorage.setItem('user', JSON.stringify(user))
-          // navigate('/')
-          // window.location.reload();
   
         }
 

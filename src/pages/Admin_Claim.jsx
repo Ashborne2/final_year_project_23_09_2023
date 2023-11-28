@@ -146,7 +146,7 @@ function Admin_Claim() {
                                                             <td>{elementInRes.username}</td>
                                                             <td>{elementInRes.submitted_time}</td>
                                                             <td><button type="button" class="btn btn-danger">Delete</button></td>
-                                                            <td><button type="button" class="btn btn-success">Update</button></td>
+                                                            <td><button type="button" class="btn btn-success">Update Status</button></td>
                                                             <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target={"#verticalycentered"+index}>
                                                                 View Details
                                                             </button>

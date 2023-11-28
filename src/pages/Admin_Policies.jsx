@@ -152,11 +152,11 @@ function Admin_Policies() {
                             </ul>
                             <hr />
                             <div className="dropdown pb-5">
-                                <Link to={"#"} className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src={''} alt="my profile image" width="30" height="30" className="rounded-circle" />
+                                <Link to={"#"} className="d-flex align-items-center text-white text-decoration-none dropdown-toggle">
+                                    {/* <img src={''} alt="my profile image" width="30" height="30" className="rounded-circle" /> */}
                                     <span className="d-none d-sm-inline mx-1">My profile</span>
                                 </Link>
-                                <ul className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                                {/* <ul className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                                     <li><Link className="dropdown-item" to={'#'}>New project...</Link></li>
                                     <li><Link className="dropdown-item" to={'#'}>Settings</Link></li>
                                     <li><Link className="dropdown-item" to={'#'}>Profile</Link></li>
@@ -164,7 +164,7 @@ function Admin_Policies() {
                                         <hr className="dropdown-divider" />
                                     </li>
                                     <li><Link className="dropdown-item" to={'#'}>Sign out</Link></li>
-                                </ul>
+                                </ul> */}
                             </div>
                         </div>
                     </div>
