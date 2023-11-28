@@ -13,41 +13,87 @@ const Login = () => {
   async function submit(e) {
     e.preventDefault();
 
+
+
     try {
-      let response = await Axios.post('http://localhost:5000/login', { username, password });
+
+      if (username === '' || password === '') {
+        toast.error("Please fill all the fields")
+      } else {
+
+        let response = await Axios.post('http://localhost:5000/login', { username, password });
 
 
-      if (response.data['status'] === 'failed') {
-        toast.error(response.data['message'])
-        // alert(response.data['message'])
-        console.log(Response)
-      } else if (response.data['status'] === 'success') {
-
-        if (response.data['user']['userType'] === 'Employee') {
-          toast.success(response.data['user']['username'] + " " + response.data['message'])
-          const user = response.data['user']
-          localStorage.setItem('token', response.data['token'])
-          localStorage.setItem('user', JSON.stringify(user))
-          navigate('/admin')
-          window.location.reload();
-        } else if (response.data['user']['userType'] === 'Customer') {
-          toast.success(response.data['user']['username'] + " " + response.data['message'])
-          const user = response.data['user']
-          localStorage.setItem('token', response.data['token'])
-          localStorage.setItem('user', JSON.stringify(user))
-          navigate('/')
-          window.location.reload();
+        if (response.data['status'] === 'failed') {
+          toast.error(response.data['message'])
+          // alert(response.data['message'])
+          console.log(Response)
+        } else if (response.data['status'] === 'success') {
+  
+          if (response.data['user']['userType'] === 'Employee') {
+            toast.success(response.data['user']['username'] + " " + response.data['message'])
+            const user = response.data['user']
+            localStorage.setItem('token', response.data['token'])
+            localStorage.setItem('user', JSON.stringify(user))
+            navigate('/admin')
+            window.location.reload();
+          } else if (response.data['user']['userType'] === 'Customer') {
+            toast.success(response.data['user']['username'] + " " + response.data['message'])
+            const user = response.data['user']
+            localStorage.setItem('token', response.data['token'])
+            localStorage.setItem('user', JSON.stringify(user))
+            navigate('/')
+            window.location.reload();
+          }
+          // alert(response.data['message'])
+  
+          // const user = response.data['user']
+  
+          // localStorage.setItem('token', response.data['token'])
+          // localStorage.setItem('user', JSON.stringify(user))
+          // navigate('/')
+          // window.location.reload();
+  
         }
-        // alert(response.data['message'])
-
-        // const user = response.data['user']
-
-        // localStorage.setItem('token', response.data['token'])
-        // localStorage.setItem('user', JSON.stringify(user))
-        // navigate('/')
-        // window.location.reload();
 
       }
+
+
+
+      // let response = await Axios.post('http://localhost:5000/login', { username, password });
+
+
+      // if (response.data['status'] === 'failed') {
+      //   toast.error(response.data['message'])
+      //   // alert(response.data['message'])
+      //   console.log(Response)
+      // } else if (response.data['status'] === 'success') {
+
+      //   if (response.data['user']['userType'] === 'Employee') {
+      //     toast.success(response.data['user']['username'] + " " + response.data['message'])
+      //     const user = response.data['user']
+      //     localStorage.setItem('token', response.data['token'])
+      //     localStorage.setItem('user', JSON.stringify(user))
+      //     navigate('/admin')
+      //     window.location.reload();
+      //   } else if (response.data['user']['userType'] === 'Customer') {
+      //     toast.success(response.data['user']['username'] + " " + response.data['message'])
+      //     const user = response.data['user']
+      //     localStorage.setItem('token', response.data['token'])
+      //     localStorage.setItem('user', JSON.stringify(user))
+      //     navigate('/')
+      //     window.location.reload();
+      //   }
+      //   // alert(response.data['message'])
+
+      //   // const user = response.data['user']
+
+      //   // localStorage.setItem('token', response.data['token'])
+      //   // localStorage.setItem('user', JSON.stringify(user))
+      //   // navigate('/')
+      //   // window.location.reload();
+
+      // }
 
     } catch (e) {
       console.log(e);

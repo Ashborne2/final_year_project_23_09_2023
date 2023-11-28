@@ -12,8 +12,7 @@ function Claim() {
   const user = JSON.parse(localStorage.getItem('user'));
 
 
-
-
+  // validation
 
   // on init state
   useEffect(() => {
@@ -61,29 +60,69 @@ function Claim() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let formData = new FormData();
 
-    formData.append('file', file);
-    formData.append('claimdata', JSON.stringify(claimdata));
+    const validateForm = () => {
+      let isValid = true;
 
-    let Response = await Axios.post('http://localhost:5000/claim', formData);
-    // try {
-    //   console.log(Response)
-    // } catch (err) {
-    //   console.log(err)
-    // }    
-    if (Response.data['status'] === 'failed') {
-      toast.error(Response.data['message'])
+      // Check if any input field is empty
+      if (
+        !claimFormData.name ||
+        !claimFormData.Insurance_ID ||
+        !claimFormData.Policy_Code ||
+        !claimFormData.damage_coverage ||
+        !claimFormData.Location ||
+        !claimFormData.date_time ||
+        !claimFormData.description
+      ) {
+        isValid = false;
+        toast.error("Please fill in all the required fields.");
+      }
 
-    } else if (Response.data['status'] === 'success') {
-      toast.success(Response.data['message'])
-      // window.location.reload();
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+      return isValid;
+    };
+
+
+    
+    try {(validateForm())
+      let formData = new FormData();
+
+      formData.append('file', file);
+      formData.append('claimdata', JSON.stringify(claimdata));
+
+      let Response = await Axios.post('http://localhost:5000/claim', formData);
+      if (Response.data['status'] === 'failed') {
+        toast.error(Response.data['message'])
+
+      } else if (Response.data['status'] === 'success') {
+        toast.success(Response.data['message'])
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      }
+
+      console.log(Response.data.data);
+
+    } catch (error) {
+      console.log(error)
     }
 
-    console.log(Response.data.data);
+    // let formData = new FormData();
+
+    // formData.append('file', file);
+    // formData.append('claimdata', JSON.stringify(claimdata));
+
+    // let Response = await Axios.post('http://localhost:5000/claim', formData);  
+    // if (Response.data['status'] === 'failed') {
+    //   toast.error(Response.data['message'])
+
+    // } else if (Response.data['status'] === 'success') {
+    //   toast.success(Response.data['message'])
+    //   setTimeout(() => {
+    //     window.location.reload();
+    //   }, 3000);
+    // }
+
+    // console.log(Response.data.data);
   };
 
 
@@ -292,7 +331,7 @@ function Claim() {
 
 
 
-                  {data.map((elementInRes, index) => 
+                  {data.map((elementInRes, index) =>
                   (
                     <div className="accordion-item accordion_design" key={index}>
                       <h2 className="accordion-header" id={"panelsStayOpen-headingOne" + index}>
@@ -304,7 +343,7 @@ function Claim() {
                           </div>
                           <div className="vr"></div>
                           <div className='normal_padding'>
-                           <strong>User :</strong>  {user.username}
+                            <strong>User :</strong>  {user.username}
                           </div>
                           <div className='normal_padding thin_text'>
                             <strong>Submitted :</strong> {elementInRes.submitted_time}

@@ -114,6 +114,7 @@ const Register = () => {
                               id="floatingInputGrid"
                               onChange={handleChange}
                               placeholder="name@example.com"
+                            
                             />
                             <label for="floatingInputGrid">First Name</label>
                           </div>
@@ -251,6 +252,7 @@ const Register = () => {
                           name='nin'
                           onChange={handleChange}
                         />
+                        
                         <label for="floatingPassword">National ID Number</label>
                       </div>
 
