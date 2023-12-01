@@ -67,11 +67,18 @@ const Adminnav = () => {
                 <div>
                   <li>
                     <Link to={'/admin/admin_user'} class="nav-link px-0 align-middle">
-                      <span class="ms-1 d-none d-sm-inline">User Management</span> </Link>
+                      <span class="ms-1 d-none d-sm-inline">User Management</span>
+                    </Link>
                   </li>
                   <li>
                     <Link to={'/admin/admin_policy'} class="nav-link px-0 align-middle">
-                      <span class="ms-1 d-none d-sm-inline">Policies</span> </Link>
+                      <span class="ms-1 d-none d-sm-inline">Policies</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={'/admin/admin_payment'} class="nav-link px-0 align-middle">
+                      <span class="ms-1 d-none d-sm-inline">Payment</span>
+                    </Link>
                   </li>
                 </div>
 
@@ -81,19 +88,13 @@ const Adminnav = () => {
                 <div>
                   <li>
                     <Link to={'/admin/emprofile'} class="nav-link px-0 align-middle">
-
                       <span class="ms-1 d-none d-sm-inline">My Profile</span> </Link>
                   </li>
                   <li>
                     <Link to={'/admin/admin_policy'} class="nav-link px-0 align-middle">
-
                       <span class="ms-1 d-none d-sm-inline">Policies</span> </Link>
                   </li>
-
                 </div>
-
-
-
 
               )}
 

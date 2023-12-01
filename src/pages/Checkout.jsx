@@ -17,6 +17,9 @@ function Checkout() {
 
   }, []);
 
+ 
+
+
   const handleChange = (e) => {
     console.log([e.target.name], e.target.value)
     setFormData({
@@ -27,10 +30,24 @@ function Checkout() {
     })
   };
 
+
+   const Checkoutinfo = {
+    user_id: user._id,
+    username: user.username,
+    policy_id: selectedProduct._id,
+    policy_name: selectedProduct.Coverage,
+    policy_duration: selectedProduct.Duration,
+    policy_cost: selectedProduct.Price,
+    CHName: FormData['CHName'],
+    cardno: FormData['cardno'],
+    Expiration: FormData['Expiration'],
+    CVV: FormData['CVV'],
+}
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let Response = await Axios.post('http://localhost:5000/checkout', FormData);
+    let Response = await Axios.post('http://localhost:5000/checkout', Checkoutinfo);
     // if (Response.data['status'] === 'failed') {
     //   toast.error(Response.data.message);
     // } else if (Response.data['status'] === 'success') {

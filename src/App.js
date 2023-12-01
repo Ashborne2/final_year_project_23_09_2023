@@ -16,6 +16,7 @@ import AdminPolicy from './pages/Admin_Policies';
 import Message from './pages/Message';
 import Checkout from './pages/Checkout';
 import AdminUser from './pages/Admin_User';
+import AdminPayment from './pages/Admin_Payment';
 
 
 
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
         <Route path='/admin/admin_claim' element={<AdminClaim />} />
         <Route path='/admin/admin_policy' element={<AdminPolicy />} />
         <Route path='/admin/admin_user' element={<AdminUser />} />
+        <Route path='/admin/admin_payment' element={<AdminPayment />} />
       </Route>
 
     </Route>

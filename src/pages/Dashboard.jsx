@@ -26,17 +26,17 @@ const Dashboard = () => {
   }, []);
 
 
-  const handleLogout = () => {
+  // const handleLogout = () => {
 
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setIsLoggedin(false);
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('user');
+  //   setIsLoggedin(false);
 
-    setTimeout(() => {
-      navigate('/login');
-      // toast.success("Logged Out Successfully")
-    }, 800); 
-  };
+  //   setTimeout(() => {
+  //     navigate('/login');
+  //     // toast.success("Logged Out Successfully")
+  //   }, 800); 
+  // };
 
 
   return (
