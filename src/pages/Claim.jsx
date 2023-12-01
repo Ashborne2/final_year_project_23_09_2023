@@ -124,11 +124,6 @@ function Claim() {
 
 
 
-
-
-
-
-
   return (
     <main id="main">
       <section id="" className="extraroom">
@@ -337,9 +332,9 @@ function Claim() {
                             <strong>Claim ID :</strong> {elementInRes._id}
                           </div>
                           <div className="vr"></div>
-                          <div className='normal_padding'>
+                          {/* <div className='normal_padding'>
                             <strong>User :</strong>  {user.username}
-                          </div>
+                          </div> */}
                           <div className='normal_padding thin_text'>
                             <strong>Submitted :</strong> {elementInRes.submitted_time}
                           </div>
@@ -347,7 +342,7 @@ function Claim() {
                           <div>
 
                             <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                              Action
+                              Status
                             </button>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="#">Action</a></li>
@@ -360,7 +355,6 @@ function Claim() {
                           </div>
 
                         </button>
-
 
 
                       </h2>
@@ -505,7 +499,9 @@ function Claim() {
 
                         </div>
                       </div>
+                      
                     </div>
+                    
                   )
                   )):(
 

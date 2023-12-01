@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import Adminnav from "../component/Adminnav";
 
 const AdminLayout = () => {
     return (
@@ -8,7 +9,8 @@ const AdminLayout = () => {
         {/* <div className="container-fluid"> 
             i am admin layout
         </div> */}
-        <main>
+        <main style={{display:"flex"}}>
+        <Adminnav />
         <Outlet />
         </main>
         <Toaster position="top-center"/>

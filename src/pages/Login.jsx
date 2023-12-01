@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import React, { useState } from 'react'
-import { Link, json, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 
@@ -12,21 +12,16 @@ const Login = () => {
 
   async function submit(e) {
     e.preventDefault();
-
     try {
-
       if (username === '' || password === '') {
         toast.error("Please fill all the fields")
       } else {
-
         let response = await Axios.post('http://localhost:5000/login', { username, password });
-
         if (response.data['status'] === 'failed') {
           toast.error(response.data['message'])
           console.log(Response)
         } else if (response.data['status'] === 'success') {
-  
-          if (response.data['user']['userType'] === 'Employee') {
+          if (response.data['user']['userType'] === 'Agent') {
             toast.success(response.data['user']['username'] + " " + response.data['message'])
             const user = response.data['user']
             localStorage.setItem('token', response.data['token'])
@@ -40,17 +35,17 @@ const Login = () => {
             localStorage.setItem('user', JSON.stringify(user))
             navigate('/')
             window.location.reload();
+          }else if (response.data['user']['userType'] === 'Employee') {
+            toast.success(response.data['user']['username'] + " " + response.data['message'])
+            const user = response.data['user']
+            localStorage.setItem('token', response.data['token'])
+            localStorage.setItem('user', JSON.stringify(user))
+            navigate('/admin')
+            window.location.reload();
           }
-  
         }
-
       }
-
-
-
       // let response = await Axios.post('http://localhost:5000/login', { username, password });
-
-
       // if (response.data['status'] === 'failed') {
       //   toast.error(response.data['message'])
       //   // alert(response.data['message'])
@@ -82,12 +77,9 @@ const Login = () => {
       //   // window.location.reload();
 
       // }
-
     } catch (e) {
       console.log(e);
     }
-
-
   }
 
   return (
@@ -98,7 +90,7 @@ const Login = () => {
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
+               
                 <div class="card mb-3">
 
                   <div class="card-body">
@@ -154,7 +146,6 @@ const Login = () => {
 
                   </div>
                 </div>
-
 
               </div>
             </div>

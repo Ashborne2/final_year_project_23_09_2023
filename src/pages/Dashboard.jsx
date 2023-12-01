@@ -1,56 +1,59 @@
 import React from "react";
 import "../dash-asset/css/dashboard.css";
 // import "../dash-asset/vendor/bootstrap/css/bootstrap.min.css";
-import logo from "../dash-asset/img/radiant.png";
+// import logo from "../dash-asset/img/radiant.png";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const [isloggedin, setIsLoggedin] = useState(false);
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {     // Retrieve the token from local storage     
+    const token = localStorage.getItem('token');      // Check if the token exists and is not expired     
+    if (token) { 
+      // You may want to implement token validation here       
+      // For simplicity, we'll assume a token is valid if it exists       
+      setIsLoggedin(true);
+      setUsername(JSON.parse(localStorage.getItem('user')).username);
+      
+    } else {
+      setIsLoggedin(false);
+    }
+  }, []);
 
 
+  const handleLogout = () => {
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setIsLoggedin(false);
+
+    setTimeout(() => {
+      navigate('/login');
+      // toast.success("Logged Out Successfully")
+    }, 800); 
+  };
 
 
   return (
     <>
-      {/* <header
-        id="header"
-        className="header fixed-top d-flex align-items-center"
-      >
-        <div class="d-flex align-items-center justify-content-between">
-          <Link to={"/"} class="logo d-flex align-items-center" >
-            <img src={logo} alt="logo" />
-            <span class="d-none d-lg-block">Admin</span>
-          </Link>
-        </div>
-
-        <nav class="header-nav ms-auto">
-          <ul class="d-flex align-items-center">
-
-            <li class="pe-3">
-              <Link
-                class="nav-link d-flex align-items-center pe-0"
-                to={""}
-              >
-
-                K. Anderson
-
-              </Link>
-
-            </li>
-          </ul>
-        </nav>
-      </header> */}
 
       <div class="container-fluid">
         <div class="row flex-nowrap">
-          <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+          {/* <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
               <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <span class="fs-5 d-none d-sm-inline">Admin Panel</span>
               </a>
-              <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+              {isloggedin ? (
+                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                 <li class="nav-item">
                   <Link to={'/admin'} class="nav-link align-middle px-0">
-                    {/* <i class="fs-4 bi-house"></i> */}
+                   
                     <span class="ms-1 d-none d-sm-inline">
                       Dashboard
                     </span>
@@ -58,44 +61,52 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <Link to={'/admin/emprofile'} class="nav-link px-0 align-middle">
-                    {/* <i class="fs-4 bi-speedometer2"></i>  */}
+                   
                     <span class="ms-1 d-none d-sm-inline">My Profile</span> </Link>
                 </li>
+
+                <li>
+                  <Link to={'/admin/emprofile'} class="nav-link px-0 align-middle">
+                   
+                    <span class="ms-1 d-none d-sm-inline">User Management</span> </Link>
+                </li>
+
                 <li>
                   <Link to={'/admin/admin_claim'} class="nav-link px-0 align-middle">
-                    {/* <i class="fs-4 bi-table"></i>  */}
+                  
                     <span class="ms-1 d-none d-sm-inline">Manage Claims</span></Link>
                 </li>
 
                 <li>
                   <Link to={'/admin/admin_policy'} class="nav-link px-0 align-middle">
-                    {/* <i class="fs-4 bi-grid"></i>  */}
+                 
                     <span class="ms-1 d-none d-sm-inline">Policies</span> </Link>
                 </li>
                 <li>
                   <Link to={'#'} class="nav-link px-0 align-middle">
-                    {/* <i class="fs-4 bi-people"></i>  */}
+                 
                     <span class="ms-1 d-none d-sm-inline">Messages</span> </Link>
                 </li>
               </ul>
-              <hr />
-              <div class="dropdown pb-5">
-                <Link className="d-flex align-items-center text-white text-decoration-none dropdown-toggle show" id="dropdownUser1" data-bs-toggle="show" aria-expanded="false">
-                  {/* <img src={logo} alt="my profile image" width="30" height="30" class="rounded-circle" /> */}
-                  <span class="d-none d-sm-inline mx-1">My profile</span>
-                </Link>
-                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                  <li><Link class="dropdown-item" to={'#'}>New project...</Link></li>
-                  <li><Link class="dropdown-item" to={'#'}>Settings</Link></li>
-                  <li><Link class="dropdown-item" to={'#'}>Profile</Link></li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li><Link class="dropdown-item" to={'#'}>Sign out</Link></li>
+              ) : (
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                <li class="nav-item">
+                  you are not logged in
+                </li>
                 </ul>
+              )}
+             
+              <hr />
+              <div style={{margin:"20px"}}>
+                <img src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png" class="rounded-circle shadow-4" style={{ width: "40px",marginLeft:"40px" }} alt="avatar" />
+                <h6 class="fw-bold text-white">logged in as {username}</h6>                
               </div>
+             
+              
+              <button class="custom-btn btn-11" onClick={handleLogout}><span>LOGOUT</span></button>
             </div>
-          </div>
+          </div> */}
+
           <div class="col py-3">
             <main id="dash-main" class="dash-main">
               <div class="pagetitle">
@@ -194,13 +205,13 @@ const Dashboard = () => {
                               <tbody>
                                 <tr>
                                   <th scope="row">
-                                    <a href="#">#2457</a>
+                                    #2457
                                   </th>
                                   <td>Brandon Jacob</td>
                                   <td>
-                                    <a href="" class="text-primary">
+                                    
                                       At praesentium minu
-                                    </a>
+                                    
                                   </td>
                                   <td>$64</td>
                                   <td>
@@ -209,13 +220,13 @@ const Dashboard = () => {
                                 </tr>
                                 <tr>
                                   <th scope="row">
-                                    <a href="#">#2147</a>
+                                    #2147
                                   </th>
                                   <td>Bridie Kessler</td>
                                   <td>
-                                    <a href="#" class="text-primary">
+                                    
                                       Blanditiis dolor omnis similique
-                                    </a>
+                                    
                                   </td>
                                   <td>$47</td>
                                   <td>
@@ -224,13 +235,13 @@ const Dashboard = () => {
                                 </tr>
                                 <tr>
                                   <th scope="row">
-                                    <a href="#">#2049</a>
+                                    #2049
                                   </th>
                                   <td>Ashleigh Langosh</td>
                                   <td>
-                                    <a href="#" class="text-primary">
+                                    
                                       At recusandae consectetur
-                                    </a>
+                                    
                                   </td>
                                   <td>$147</td>
                                   <td>
@@ -239,13 +250,13 @@ const Dashboard = () => {
                                 </tr>
                                 <tr>
                                   <th scope="row">
-                                    <a href="#">#2644</a>
+                                    #2644
                                   </th>
                                   <td>Angus Grady</td>
                                   <td>
-                                    <a href="#" class="text-primar">
+                                    
                                       Ut voluptatem id earum et
-                                    </a>
+                                    
                                   </td>
                                   <td>$67</td>
                                   <td>
@@ -254,13 +265,12 @@ const Dashboard = () => {
                                 </tr>
                                 <tr>
                                   <th scope="row">
-                                    <a href="#">#2644</a>
+                                    #2644
                                   </th>
                                   <td>Raheem Lehner</td>
-                                  <td>
-                                    <a href="#" class="text-primary">
+                                  <td>                                  
                                       Sunt similique distinctio
-                                    </a>
+                                    
                                   </td>
                                   <td>$165</td>
                                   <td>
@@ -280,16 +290,7 @@ const Dashboard = () => {
                               Performance evaluation <span>| Charts</span>
                             </h5>
 
-                            <div class="dropdown">
-                              <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                              </ul>
-                            </div>
+                            
 
                             {/* <table class="table table-borderless">
                         <thead>
@@ -507,56 +508,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* <aside id="sidebar" class="sidebar">
-        <ul class="sidebar-nav" id="sidebar-nav">
-          <li class="nav-item">
-            <Link class="nav-link " to={"/dashboard"}>
-              <i class="bi bi-grid"></i>
-              <span>Dashboard</span>
-            </Link>
-          </li>
-
-          <li class="nav-heading">Pages</li>
-
-          <li class="nav-item">
-            <Link class="nav-link collapsed" to={"/admin/emprofile"}>
-              <i class="bi bi-person"></i>
-              <span>My Profile</span>
-            </Link>
-          </li>          
-
-          <li class="nav-item">
-            <Link class="nav-link collapsed" to={'/error'}>
-              <i class="bi bi-dash-circle"></i>
-              <span>Error 404</span>
-            </Link>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-blank.html">
-              <i class="bi bi-file-post-fill"></i>
-              <span>Manage Claims</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-blank 2.html">
-              <i class="bi bi-file-earmark-text"></i>
-              <span>Policies</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-blank 2.html">
-              <i class="bi bi-chat-left-text"></i>
-              <span>Messages</span>
-            </a>
-          </li>
-        </ul>
-      </aside> */}
-
-
 
     </>
   );

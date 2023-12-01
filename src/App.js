@@ -3,7 +3,6 @@ import React from 'react';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import Footer from './component/Footer';
 import AdminLayout from './pages/AdminLayout';
-
 import Claim from './pages/Claim';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
@@ -16,6 +15,7 @@ import PolicyService from './pages/PolicyService';
 import AdminPolicy from './pages/Admin_Policies';
 import Message from './pages/Message';
 import Checkout from './pages/Checkout';
+import AdminUser from './pages/Admin_User';
 
 
 
@@ -44,6 +44,7 @@ const router = createBrowserRouter(
         <Route path='/admin/emprofile' element={<EmProfile />} />
         <Route path='/admin/admin_claim' element={<AdminClaim />} />
         <Route path='/admin/admin_policy' element={<AdminPolicy />} />
+        <Route path='/admin/admin_user' element={<AdminUser />} />
       </Route>
 
     </Route>

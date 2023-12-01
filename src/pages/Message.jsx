@@ -15,10 +15,6 @@ const handleChange = (e) => {
 
 
 
-
-
-
-
     return (
         <>
             <main id="main">

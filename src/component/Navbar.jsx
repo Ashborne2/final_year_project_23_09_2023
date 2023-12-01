@@ -4,7 +4,6 @@ import "../assets/vendor/bootstrap/css/bootstrap.min.css";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Toast } from "bootstrap";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
