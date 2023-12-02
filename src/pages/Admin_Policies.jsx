@@ -185,7 +185,7 @@ function Admin_Policies() {
                                                 <h5 class="card-title">Current Policies</h5>
 
 
-                                                <table class="table table-dark">
+                                                <table class="table table-dark text-center">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
@@ -207,7 +207,7 @@ function Admin_Policies() {
                                                                 <td style={{ width: "100px" }}>{item.description}</td>
                                                                 <td style={{ width: "100px" }}>{item.Duration}</td>
                                                                 <td style={{ width: "100px" }}>${item.Price}</td>
-                                                                <td style={{ width: "100px", height: "100px" }}><img src={item.file} alt="" style={{ width: '100px', height: '100px' }} /></td>
+                                                                <td style={{ width: "100px", height: "100px" , backgroundColor: "white" }}><img src={item.file} alt="" style={{ width: '100px', height: '100px' }} /></td>
 
 
                                                                 <td style={{ width: "100px" }}><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target={"#verticalycentered" + index}>

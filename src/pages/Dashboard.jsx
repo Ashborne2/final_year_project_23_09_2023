@@ -5,6 +5,7 @@ import "../dash-asset/css/dashboard.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Bar } from "react-chartjs-2";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -289,6 +290,8 @@ const Dashboard = () => {
                             <h5 class="card-title">
                               Performance evaluation <span>| Charts</span>
                             </h5>
+{/* <Bar /> */}
+
 
                             
 

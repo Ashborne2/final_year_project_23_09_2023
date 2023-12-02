@@ -3,6 +3,7 @@ import "../dash-asset/css/dashboard.css";
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 function Admin_Claim() {
     // let loop = [
@@ -15,23 +16,11 @@ function Admin_Claim() {
     // ]
 
     const [data, setData] = useState([])
-    
 
-    
+
 
     useEffect(() => {
 
-        // fetch("http://localhost:3000/claim")
-        //     .then(res => res.json())
-        //     .then(
-        //         (result) => {
-        //             // setData(result)
-        //             console.log(result)
-        //         },
-        //         (error) => {
-        //             console.log(error)
-        //         }
-        //     )
         axios.get('http://localhost:5000/adminClaim')
             .then(res => {
                 console.log(res.data.data)
@@ -41,6 +30,32 @@ function Admin_Claim() {
                 console.log(err)
             })
     }, [])
+
+
+
+    // update ststus
+    const handleStatus = async (id,status) => {
+
+        let data = {
+            "id":id,
+            "status":status
+        }
+
+        let result = await axios.post('http://localhost:5000/upStatus',data);
+        if(result.data['status']=='success'){
+            toast.success("Claim Status Updated")
+            setTimeout(() => {
+               window.location.reload(); 
+            }, 3000);
+
+            
+        }  else{
+            
+        }
+        
+        
+    };
+
 
 
     return (
@@ -70,6 +85,7 @@ function Admin_Claim() {
                                                         <th scope="col">User Name</th>
                                                         <th scope="col">Submitted Time</th>
                                                         <th scope="col">Status</th>
+                                                        <th scope="col">Update Status</th>
                                                         <th scope="col">---</th>
                                                     </tr>
                                                 </thead>
@@ -80,12 +96,23 @@ function Admin_Claim() {
                                                             <td>{elementInRes._id}</td>
                                                             <td>{elementInRes.username}</td>
                                                             <td>{elementInRes.submitted_time}</td>
-                                                            <td><button type="button" class="btn btn-info">{elementInRes.status}</button></td>
-                                                            <td><button type="button" class="btn btn-success">Update Status</button></td>
-                                                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target={"#verticalycentered"+index}>
+                                                            <td style={{ color: "red" }}>{elementInRes.status}</td>
+
+
+
+                                                            <td><button type="button" class="btn btn-success" id='Astatus' onClick={()=> handleStatus(elementInRes._id,'Approve')}>Approve</button></td>
+
+
+                                                            <td><button type="button" class="btn btn-danger" id='Dstatus' onClick={()=> handleStatus(elementInRes._id,'Decline')}>Decline</button></td>
+
+
+
+
+
+                                                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target={"#verticalycentered" + index}>
                                                                 View Details
                                                             </button>
-                                                                <div class="modal fade" id={"verticalycentered"+index} tabindex="-1">
+                                                                <div class="modal fade" id={"verticalycentered" + index} tabindex="-1">
                                                                     <div class="modal-dialog modal-xl modal-dialog-centered">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -165,7 +192,7 @@ function Admin_Claim() {
                                                                                                         </strong>
                                                                                                     </div>
                                                                                                     <div className="col-8">
-                                                                                                    {elementInRes.location}
+                                                                                                        {elementInRes.location}
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div className="row">
@@ -224,7 +251,7 @@ function Admin_Claim() {
 
 
                                 </div>
-                             
+
                             </section>
 
                         </main>
