@@ -17,6 +17,8 @@ import Message from './pages/Message';
 import Checkout from './pages/Checkout';
 import AdminUser from './pages/Admin_User';
 import AdminPayment from './pages/Admin_Payment';
+import UserInsurance from './pages/User_insurance';
+import AdminMessage from './pages/Admin_message';
 
 
 
@@ -33,9 +35,9 @@ const router = createBrowserRouter(
         
         <Route path='/policyservice' element={<PolicyService />} />
         <Route path='/checkout' element={<Checkout />} />
+        <Route path='/userinsurance' element={<UserInsurance />} />
         
-        
-        <Route path='/message' element={<Message />} />
+        <Route path='/message/:id' element={<Message />} />
         
         
       </Route>
@@ -47,6 +49,7 @@ const router = createBrowserRouter(
         <Route path='/admin/admin_policy' element={<AdminPolicy />} />
         <Route path='/admin/admin_user' element={<AdminUser />} />
         <Route path='/admin/admin_payment' element={<AdminPayment />} />
+        <Route path='/admin/admin_message' element={<AdminMessage />} />
       </Route>
 
     </Route>

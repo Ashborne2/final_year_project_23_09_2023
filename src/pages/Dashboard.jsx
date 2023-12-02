@@ -2,112 +2,116 @@ import React from "react";
 import "../dash-asset/css/dashboard.css";
 // import "../dash-asset/vendor/bootstrap/css/bootstrap.min.css";
 // import logo from "../dash-asset/img/radiant.png";
-import { Link } from "react-router-dom";
+import { Link, parsePath } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
+import axios from "axios";
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const [isloggedin, setIsLoggedin] = useState(false);
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+
+  
   const [username, setUsername] = useState("");
-
-  useEffect(() => {     // Retrieve the token from local storage     
-    const token = localStorage.getItem('token');      // Check if the token exists and is not expired     
-    if (token) { 
-      // You may want to implement token validation here       
-      // For simplicity, we'll assume a token is valid if it exists       
-      setIsLoggedin(true);
-      setUsername(JSON.parse(localStorage.getItem('user')).username);
-      
-    } else {
-      setIsLoggedin(false);
-    }
-  }, []);
+  const [forchart, setForchart] = useState([]);
+  const [lebel, setLebel] = useState([]);
 
 
-  // const handleLogout = () => {
+  useEffect(() => {
 
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('user');
-  //   setIsLoggedin(false);
+    axios.get('http://localhost:5000/getAllPayments')
+      .then(res => {
 
-  //   setTimeout(() => {
-  //     navigate('/login');
-  //     // toast.success("Logged Out Successfully")
-  //   }, 800); 
-  // };
+        // let data23 = res.data.data.map((item) => [Number(item.policy_cost)])
+        // let data24 = res.data.data.map((item) => item.policy_name)
+        // setForchart(data23)
 
+
+          // count all policy types
+          let policyType = res.data.data;
+          let policyTypeCount = {};
+          // console.log(policyType);
+
+
+
+          // policyType.forEach(function (i) { policyTypeCount[i] = (policyTypeCount[i] || 0) + 1; });
+
+
+          // policyType.forEach(function (i) { policyTypeCount[i] = (policyTypeCount[i] || 0) + 1; });
+          // console.log(policyTypeCount);
+
+
+
+
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+  const options = {
+
+  };
+
+  const data= {
+    "policyType":["Colission", "accident", "theft", "fire", "flood", "other"],
+    "data":[32,5,34,65,76,7,67,34,5]
+  }
+
+
+
+const [chartData, setChartData] = useState({
+    // labels: forchart.map((item) => item.policy_name),
+    // labels: ["Colission", "accident", "theft", "fire", "flood", "other"],
+    labels: data.policyType,
+    datasets: [
+      {
+        label: "Policy Name",
+        // data: forchart,
+        data: data.data,
+        borderColor: ["rgba(255, 206, 86, 0.2)"],
+        backgroundColor: ["rgba(255, 206, 86, 0.2)"],
+        pointBackgroundColor: ["rgba(255, 206, 86, 0.2)"],
+        pointBorderColor: ["rgba(255, 206, 86, 0.2)"],
+      },
+      // {
+      //   label: "Policy Name",
+      //   // data: forchart.map((item ,index) => parseInt(item.policy_cost)),
+      //   data: [12, 15, 3, 5, 2, 3],
+      //   borderColor: ["rgba(255, 206, 86, 0.2)"],
+      //   backgroundColor: ["rgba(255, 206, 86, 0.2)"],
+      //   pointBackgroundColor: ["rgba(255, 206, 86, 0.2)"],
+      //   pointBorderColor: ["rgba(255, 206, 86, 0.2)"],
+      // },
+     
+    ],
+  });
 
   return (
     <>
 
       <div class="container-fluid">
-        <div class="row flex-nowrap">
-          {/* <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-              <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <span class="fs-5 d-none d-sm-inline">Admin Panel</span>
-              </a>
-              {isloggedin ? (
-                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                <li class="nav-item">
-                  <Link to={'/admin'} class="nav-link align-middle px-0">
-                   
-                    <span class="ms-1 d-none d-sm-inline">
-                      Dashboard
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to={'/admin/emprofile'} class="nav-link px-0 align-middle">
-                   
-                    <span class="ms-1 d-none d-sm-inline">My Profile</span> </Link>
-                </li>
-
-                <li>
-                  <Link to={'/admin/emprofile'} class="nav-link px-0 align-middle">
-                   
-                    <span class="ms-1 d-none d-sm-inline">User Management</span> </Link>
-                </li>
-
-                <li>
-                  <Link to={'/admin/admin_claim'} class="nav-link px-0 align-middle">
-                  
-                    <span class="ms-1 d-none d-sm-inline">Manage Claims</span></Link>
-                </li>
-
-                <li>
-                  <Link to={'/admin/admin_policy'} class="nav-link px-0 align-middle">
-                 
-                    <span class="ms-1 d-none d-sm-inline">Policies</span> </Link>
-                </li>
-                <li>
-                  <Link to={'#'} class="nav-link px-0 align-middle">
-                 
-                    <span class="ms-1 d-none d-sm-inline">Messages</span> </Link>
-                </li>
-              </ul>
-              ) : (
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                <li class="nav-item">
-                  you are not logged in
-                </li>
-                </ul>
-              )}
-             
-              <hr />
-              <div style={{margin:"20px"}}>
-                <img src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png" class="rounded-circle shadow-4" style={{ width: "40px",marginLeft:"40px" }} alt="avatar" />
-                <h6 class="fw-bold text-white">logged in as {username}</h6>                
-              </div>
-             
-              
-              <button class="custom-btn btn-11" onClick={handleLogout}><span>LOGOUT</span></button>
-            </div>
-          </div> */}
-
+        <div class="row flex-nowrap">       
           <div class="col py-3">
             <main id="dash-main" class="dash-main">
               <div class="pagetitle">
@@ -210,9 +214,9 @@ const Dashboard = () => {
                                   </th>
                                   <td>Brandon Jacob</td>
                                   <td>
-                                    
-                                      At praesentium minu
-                                    
+
+                                    At praesentium minu
+
                                   </td>
                                   <td>$64</td>
                                   <td>
@@ -225,9 +229,9 @@ const Dashboard = () => {
                                   </th>
                                   <td>Bridie Kessler</td>
                                   <td>
-                                    
-                                      Blanditiis dolor omnis similique
-                                    
+
+                                    Blanditiis dolor omnis similique
+
                                   </td>
                                   <td>$47</td>
                                   <td>
@@ -240,9 +244,9 @@ const Dashboard = () => {
                                   </th>
                                   <td>Ashleigh Langosh</td>
                                   <td>
-                                    
-                                      At recusandae consectetur
-                                    
+
+                                    At recusandae consectetur
+
                                   </td>
                                   <td>$147</td>
                                   <td>
@@ -255,9 +259,9 @@ const Dashboard = () => {
                                   </th>
                                   <td>Angus Grady</td>
                                   <td>
-                                    
-                                      Ut voluptatem id earum et
-                                    
+
+                                    Ut voluptatem id earum et
+
                                   </td>
                                   <td>$67</td>
                                   <td>
@@ -269,9 +273,9 @@ const Dashboard = () => {
                                     #2644
                                   </th>
                                   <td>Raheem Lehner</td>
-                                  <td>                                  
-                                      Sunt similique distinctio
-                                    
+                                  <td>
+                                    Sunt similique distinctio
+
                                   </td>
                                   <td>$165</td>
                                   <td>
@@ -290,99 +294,8 @@ const Dashboard = () => {
                             <h5 class="card-title">
                               Performance evaluation <span>| Charts</span>
                             </h5>
-{/* <Bar /> */}
-
-
-                            
-
-                            {/* <table class="table table-borderless">
-                        <thead>
-                          <tr>
-                            <th scope="col">Preview</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Sold</th>
-                            <th scope="col">Revenue</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">
-                              <a href="#">
-                                <img src="assets/img/product-1.jpg" alt="" />
-                              </a>
-                            </th>
-                            <td>
-                              <a href="#" class="text-primary fw-bold">
-                                Ut inventore ipsa voluptas nulla
-                              </a>
-                            </td>
-                            <td>$64</td>
-                            <td class="fw-bold">124</td>
-                            <td>$5,828</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                              <a href="#">
-                                <img src="assets/img/product-2.jpg" alt="" />
-                              </a>
-                            </th>
-                            <td>
-                              <a href="#" class="text-primary fw-bold">
-                                Exercitationem similique doloremque
-                              </a>
-                            </td>
-                            <td>$46</td>
-                            <td class="fw-bold">98</td>
-                            <td>$4,508</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                              <a href="#">
-                                <img src="assets/img/product-3.jpg" alt="" />
-                              </a>
-                            </th>
-                            <td>
-                              <a href="#" class="text-primary fw-bold">
-                                Doloribus nisi exercitationem
-                              </a>
-                            </td>
-                            <td>$59</td>
-                            <td class="fw-bold">74</td>
-                            <td>$4,366</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                              <a href="#">
-                                <img src="assets/img/product-4.jpg" alt="" />
-                              </a>
-                            </th>
-                            <td>
-                              <a href="#" class="text-primary fw-bold">
-                                Officiis quaerat sint rerum error
-                              </a>
-                            </td>
-                            <td>$32</td>
-                            <td class="fw-bold">63</td>
-                            <td>$2,016</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                              <a href="#">
-                                <img src="assets/img/product-5.jpg" alt="" />
-                              </a>
-                            </th>
-                            <td>
-                              <a href="#" class="text-primary fw-bold">
-                                Sit unde debitis delectus repellendus
-                              </a>
-                            </td>
-                            <td>$79</td>
-                            <td class="fw-bold">41</td>
-                            <td>$3,239</td>
-                          </tr>
-                        </tbody>
-                      </table> */}
+                            <Bar data={chartData} options={options} />
+                            {/* <Line data={chartData} /> */}
                           </div>
                         </div>
                       </div>

@@ -80,21 +80,24 @@ export const Navbar = () => {
           {isloggedin ? (
             <ul>
               <li><NavLink className="nav-link scrollto " activeclassName="active" to={'/'}>Home</NavLink></li>
-              {/* <li><a className="nav-link scrollto" href="#about">About</a></li> */}
+             
               <li><NavLink  className="nav-link scrollto" activeclassName="active" to={"/policyservice"}>Policy Services</NavLink></li>
               <li><NavLink to={"/claim"} className="nav-link scrollto" activeclassName="active" >Claims</NavLink></li>
-              <li><NavLink to={"/message"} className="nav-link scrollto" activeclassName="active" >Messages</NavLink></li>              
+              {/* <li><NavLink to={"/message"} className="nav-link scrollto" activeclassName="active" >Messages</NavLink></li>  */}
+               <li><NavLink to={"/userinsurance"} className="nav-link scrollto" activeclassName="active">Your Insurances</NavLink></li>            
               <li><NavLink onClick={handleLogout} className="getstarted scrollto">Log Out</NavLink></li>
               <li style={{color:"white"}}><strong>{username}</strong></li>
+              
               <img src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png" class="rounded-circle shadow-4" style={{ width: "40px",marginLeft:"10px" }} alt="avatar" />
+
+
               <i className="bi bi-list mobile-nav-toggle" onClick={handleClick} ></i>
             </ul>
           ) : (
             <ul>
-              <li><a className="nav-link scrollto active" href="#hero">Home</a></li>
-              {/* <li><a className="nav-link scrollto" href="#about">About</a></li> */}
+              <li><a className="nav-link scrollto active" href="#hero">Home</a></li>           
               <li><a className="nav-link scrollto" href="#services">Services</a></li>
-              {/* <li><a className="nav-link scrollto" href="#contact">Contact</a></li> */}
+             
               <li><NavLink to={"/login"} className="getstarted scrollto">Login</NavLink></li>
               <i className="bi bi-list mobile-nav-toggle" onClick={handleClick} ></i>
             </ul>

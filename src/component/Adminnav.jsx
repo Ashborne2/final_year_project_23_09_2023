@@ -109,7 +109,7 @@ const Adminnav = () => {
 
 
               <li>
-                <Link to={'#'} class="nav-link px-0 align-middle">
+                <Link to={'/admin/admin_message'} class="nav-link px-0 align-middle">
                   <span class="ms-1 d-none d-sm-inline">Messages</span> </Link>
               </li>
 

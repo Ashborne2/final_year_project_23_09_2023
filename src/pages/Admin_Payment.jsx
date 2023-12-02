@@ -10,7 +10,6 @@ function Admin_Payment() {
 
 
 
-
   const [selectedAgent, setSelectedAgent] = useState();
 
 
@@ -41,6 +40,7 @@ function Admin_Payment() {
   
 
   const saveChages = async () => {
+
     let agent;
     agents.forEach(element => {
         if (element._id == selectedAgent) {
@@ -55,7 +55,8 @@ function Admin_Payment() {
         "agentName":agent.fName
     }
 
-    
+    let result = await axios.post("http://localhost:5000/assignAgent", data);
+    console.log(result);
 
 
   };
@@ -129,7 +130,7 @@ function Admin_Payment() {
 </button>
                               </td>
                              
-                              <td></td>
+                              <td>{elementInRes.Agent_name}</td>
 
                               {/* <td><button type="button" class="btn btn-info"></button></td>
                                                             <td><button type="button" class="btn btn-success">Update Status</button></td>
